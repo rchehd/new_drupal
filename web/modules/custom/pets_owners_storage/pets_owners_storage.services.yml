@@ -1,7 +1,4 @@
-# This declares the plugin manager to the service container. For background
-# information on the service container, see https://www.drupal.org/node/2133171.
-# Changes here require that the cache be cleared in order to have Drupal notice
-# them.
+# This declares the plugin manager to the service container.
 services:
   pets_owners_storage.repository:
     class: Drupal\pets_owners_storage\PetsOwnersRepository

@@ -16,14 +16,12 @@ class PetsOwnersController extends ControllerBase {
     $controller->setStringTranslation($container->get('string_translation'));
     return $controller;
   }
-
   /**
    * Construct a new controller.
    */
   public function __construct(PetsOwnersRepository $repository) {
     $this->repository = $repository;
   }
-
   /**
    * Return page with data table.
    * @return array
@@ -34,6 +32,7 @@ class PetsOwnersController extends ControllerBase {
       '#markup' => $this->t('List of data form database.'),
     ];
     $rows = [];
+    // Headers of table.
     $headers = [
       $this->t('Id'),
       $this->t('Name'),
@@ -46,6 +45,7 @@ class PetsOwnersController extends ControllerBase {
       $this->t('Email'),
       $this->t('Actions'),
     ];
+    // Load data from db.
     $entries = $this->repository->load();
 
     foreach ($entries as $entry) {
@@ -68,18 +68,11 @@ class PetsOwnersController extends ControllerBase {
       '#rows' => $rows,
       '#empty' => $this->t('No entries available.'),
     ];
-    // Don't cache this page.
-    $content['#cache']['max-age'] = 0;
-
     return $content;
   }
 
   /**
-   * Id of table.
-   * @param $test_param
-   * Delete data.
-   *
-   * @return array
+   * Test module.
    */
   public function testCallback($test_param) {
     $result=$this->repository->delete($test_param);

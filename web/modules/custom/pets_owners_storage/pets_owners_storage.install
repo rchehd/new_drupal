@@ -1,28 +1,5 @@
 <?php
-function pets_owners_storage_install() {
-  // Insert some example data into our schema.
-  $entries = [
-    [
-      'name' => 'test',
-      'gender' => 'test',
-      'prefix' => 'test',
-      'age' => 10,
-      'mother_name' => 'test',
-      'father_name' => 'test',
-      'email' => 'test@test.com',
-      'name_of_pets' => 'test',
-    ],
-
-  ];
-
-  $connection = \Drupal::database();
-  foreach ($entries as $entry) {
-    $connection->insert('pets_owners_storage')->fields($entry)->execute();
-  }
-}
-
 function pets_owners_storage_schema() {
-
   $schema['pets_owners_storage'] = [
     'description' => 'Stores of data of pets owners.',
     'fields' => [
@@ -31,12 +8,6 @@ function pets_owners_storage_schema() {
         'not null' => TRUE,
         'description' => 'Primary Key: Unique person ID.',
       ],
-//      'uid' => [
-//        'type' => 'int',
-//        'not null' => TRUE,
-//        'default' => 0,
-//        'description' => "Creator user's {users}.uid",
-//      ],
       'name' => [
         'type' => 'varchar',
         'length' => 255,
@@ -90,7 +61,5 @@ function pets_owners_storage_schema() {
       'age' => ['age'],
     ]
   ];
-
-
-return $schema;
+  return $schema;
 }

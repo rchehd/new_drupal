@@ -14,17 +14,13 @@ pets_owners_storage.list:
   requirements:
     _permission: 'access content'
 
-
 pets_owners_storage.delete:
   path: '/pets_owners_storage/delete/{test_param}'
   defaults:
     _title: 'Delete entry'
     _form: '\Drupal\pets_owners_storage\Form\PODeleteForm'
-#    _controller: '\Drupal\pets_owners_storage\Controller\PetsOwnersController::testCallback'
   requirements:
     _permission: 'access content'
-
-
 
 pets_owners_storage.add:
   path: '/pets_owners_storage/pets_owners_storage-list/add'
@@ -33,8 +29,6 @@ pets_owners_storage.add:
     _form: '\Drupal\pets_owners_form\Form\PetsOwnersForm'
   requirements:
     _permission: 'access content'
-
-
 
 pets_owners_storage.update:
   path: '/pets_owners_storage/update/{data}'

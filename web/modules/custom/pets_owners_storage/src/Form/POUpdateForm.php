@@ -42,15 +42,12 @@ class POUpdateForm extends FormBase{
   }
 
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   * @param null $data
    *
-   * @return array
    */
   public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state,$data=null) {
     $this->id=$data;
     $entries = $this->repository->loadFromId($this->id);
+    $rows=[];
     foreach ($entries as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\Html::escape', (array) $entry);
@@ -163,8 +160,7 @@ class POUpdateForm extends FormBase{
   }
 
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   * Update user data.
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $entry = [
@@ -186,8 +182,7 @@ class POUpdateForm extends FormBase{
     }
   }
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   * Validate form.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Validate name.

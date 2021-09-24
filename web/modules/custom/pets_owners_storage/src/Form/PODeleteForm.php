@@ -11,7 +11,6 @@ use Drupal\Core\Url;
 use Drupal\pets_owners_storage\PetsOwnersRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 class PODeleteForm extends ConfirmFormBase {
   use StringTranslationTrait;
   use MessengerTrait;
@@ -38,29 +37,39 @@ class PODeleteForm extends ConfirmFormBase {
     $this->repository = $repository;
     $this->currentUser = $current_user;
   }
+
+  /**
+   * Return questions.
+   */
   public function getQuestion() {
     return $this->t('Do you want delete data?');
   }
 
+  /**
+   * Return url come back to table.
+   */
   public function getCancelUrl() {
     return Url::fromRoute('pets_owners_storage.list');
   }
-
 
   public function getFormId() {
     return 'po_delete_form';
   }
 
+  /**
+   * Delete row after confirm and return to table.
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $result=$this->repository->delete($this->id);
+    $this->repository->delete($this->id);
     $this->messenger()->addMessage($this->t('Congratulations! You successfully delete your data!'));
     $form_state->setRedirect('pets_owners_storage.list');
-    return ;
-
   }
+
+  /**
+   * Build form and remember id of row.
+   */
   public function buildForm(array $form, FormStateInterface $form_state, $test_param=null) {
     $this->id = $test_param;
-
     return parent::buildForm($form, $form_state);
   }
 
