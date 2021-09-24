@@ -1,14 +1,11 @@
 <?php
 namespace Drupal\pets_owners_storage\Form;
 use Drupal\Core\Form\FormBase;
-
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\pets_owners_storage\PetsOwnersRepository;
-use Laminas\Diactoros\Response\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class POUpdateForm extends FormBase{
@@ -185,6 +182,7 @@ class POUpdateForm extends FormBase{
     $return = $this->repository->update($entry);
     if ($return) {
       $this->messenger()->addMessage($this->t('Congratulations! You successfully update your data!'));
+      $form_state->setRedirect('pets_owners_storage.list');
     }
   }
   /**
