@@ -1,0 +1,96 @@
+<?php
+function pets_owners_storage_install() {
+  // Insert some example data into our schema.
+  $entries = [
+    [
+      'name' => 'test',
+      'gender' => 'test',
+      'prefix' => 'test',
+      'age' => 10,
+      'mother_name' => 'test',
+      'father_name' => 'test',
+      'email' => 'test@test.com',
+      'name_of_pets' => 'test',
+    ],
+
+  ];
+
+  $connection = \Drupal::database();
+  foreach ($entries as $entry) {
+    $connection->insert('pets_owners_storage')->fields($entry)->execute();
+  }
+}
+
+function pets_owners_storage_schema() {
+
+  $schema['pets_owners_storage'] = [
+    'description' => 'Stores of data of pets owners.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique person ID.',
+      ],
+//      'uid' => [
+//        'type' => 'int',
+//        'not null' => TRUE,
+//        'default' => 0,
+//        'description' => "Creator user's {users}.uid",
+//      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of the person.',
+      ],
+      'gender' => [
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        'description' => 'Gender of the person.',
+      ],
+      'prefix' => [
+        'type' => 'varchar',
+        'length' => 10,
+        'description' => 'Prefix_ of the person.',
+      ],
+      'age' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+        'description' => 'The age of the person in years.',
+      ],
+      'mother_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Mother name of person.',
+      ],
+      'father_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Father name of person.',
+      ],
+      'name_of_pets' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Name of pets',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Email of person.',
+      ],
+
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'name' => ['name'],
+      'email' => ['email'],
+      'age' => ['age'],
+    ]
+  ];
+
+
+return $schema;
+}

@@ -1,0 +1,19 @@
+pets_owners_storage.description:
+  title: Data form form
+  route_name: pets_owners_storage.generate_entry_list
+  expanded: TRUE
+
+pets_owners_storage.list:
+  title: List
+  route_name: pets_owners_storage.list
+  weight: 0
+  parent: pets_owners_storage.description
+
+pets_owners_storage.add:
+  title: Add information
+  route_name: pets_owners_storage.add
+  weight: 1
+  parent: pets_owners_storage.description
+
+
+

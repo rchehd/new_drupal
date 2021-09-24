@@ -1,0 +1,11 @@
+name: Pets owner form
+type: module
+description: Form for pets owners.
+package: Custom
+core_version_requirement: ^9
+dependencies:
+  - drupal:node
+
+
+
+

@@ -1,0 +1,13 @@
+welcome_module.my_menu:
+  title: 'My menu'
+  description: 'My menu'
+  expanded: 1
+  route_name: welcome_module.my_menu
+
+welcome_module.my_menu.sub_menu:
+  title: 'Pets owners from'
+  parent: welcome_module.my_menu
+  description: 'Pets owners from'
+  expanded: 1
+  route_name: welcome_module.my_menu.sub_menu
+

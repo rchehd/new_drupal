@@ -1,0 +1,6 @@
+name: Pets Owners Storage
+type: module
+description: 'Module to save data to db from pets owners from.'
+package: Custom
+version: 1.0
+core_version_requirement: ^9

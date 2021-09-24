@@ -1,0 +1,11 @@
+authenticated user:
+  title: 'Authenticated user'
+  description: 'Access for authenticated user'
+
+superuser:
+  title: 'Superuser'
+  description: 'Access for superuser'
+
+allusers:
+  title: 'All users'
+  description: 'Access for all users'

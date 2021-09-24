@@ -1,0 +1,41 @@
+welcome_module.welcome:
+  path: '/welcome/page'
+  defaults:
+    _controller: '\Drupal\welcome_module\Controller\WelcomeController::welcome'
+    _title: 'Welcome to My Module in Drupal'
+  requirements:
+    _permission: 'allusers'
+
+welcome_module.smile_test:
+  path: '/smile_test'
+  defaults:
+    _controller: '\Drupal\welcome_module\Controller\WelcomeController::smileTest'
+    _title: 'Welcome to smile_test'
+  requirements:
+    _permission: 'authenticated user'
+
+welcome_module.node_render:
+  path: '/smile_test/node_render/{nid}'
+  defaults:
+    _controller: '\Drupal\welcome_module\Controller\WelcomeController::nodeRender'
+  requirements:
+    _custom_access: '\Drupal\welcome_module\Controller\WelcomeController::hasAccessOfSuperuser'
+    nid: \^\d
+
+welcome_module.my_menu: # This is a route name.
+  path: '/welcome_module/menu-example'
+  defaults:
+    _controller: '\Drupal\welcome_module\Controller\WelcomeController::myMenu'
+    _title: 'My menu'
+  requirements:
+    _permission: 'allusers'
+
+welcome_module.my_menu.sub_menu: # This is a route name.
+  path: '/welcome_module/menu-example/sub_menu'
+  defaults:
+    _controller: '\Drupal\welcome_module\Controller\WelcomeController::subMenu'
+    _title: 'Pets owners from'
+  requirements:
+    _permission: 'allusers'
+
+

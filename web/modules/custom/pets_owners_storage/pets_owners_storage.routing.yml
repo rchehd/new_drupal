@@ -1,0 +1,49 @@
+pets_owners_storage.generate_entry_list:
+  path: '/pets_owners_storage/pets_owners_storage-list'
+  defaults:
+    _title: 'Data form form'
+    _controller: '\Drupal\pets_owners_storage\Controller\PetsOwnersController::entryList'
+  requirements:
+    _permission: 'access content'
+
+pets_owners_storage.list:
+  path: '/pets_owners_storage/list'
+  defaults:
+    _title: 'List'
+    _controller: '\Drupal\pets_owners_storage\Controller\PetsOwnersController::entryList'
+  requirements:
+    _permission: 'access content'
+
+
+pets_owners_storage.delete:
+  path: '/pets_owners_storage/delete/{test_param}'
+  defaults:
+    _title: 'Delete entry'
+    _controller: '\Drupal\pets_owners_storage\Controller\PetsOwnersController::testCallback'
+  requirements:
+    _permission: 'access content'
+
+
+
+pets_owners_storage.add:
+  path: '/pets_owners_storage/pets_owners_storage-list/add'
+  defaults:
+    _title: 'Add information'
+    _form: '\Drupal\pets_owners_form\Form\PetsOwnersForm'
+  requirements:
+    _permission: 'access content'
+
+
+
+pets_owners_storage.update:
+  path: '/pets_owners_storage/update/{data}'
+  defaults:
+    _title: 'Update your data'
+    _form: '\Drupal\pets_owners_storage\Form\POUpdateForm'
+  requirements:
+    _permission: 'access content'
+
+
+
+
+
