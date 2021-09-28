@@ -5,8 +5,11 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Url;
+use Drupal\pets_owners_storage\Form\PODeleteForm;
 use Drupal\pets_owners_storage\PetsOwnersRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 class POUpdateForm extends FormBase{
   use StringTranslationTrait;
@@ -44,8 +47,8 @@ class POUpdateForm extends FormBase{
   /**
    *
    */
-  public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state,$data=null) {
-    $this->id=$data;
+  public function buildForm(array $form, FormStateInterface $form_state,$data = NULL) {
+    $this->id = $data;
     $entries = $this->repository->loadFromId($this->id);
     $rows=[];
     foreach ($entries as $entry) {
@@ -123,7 +126,7 @@ class POUpdateForm extends FormBase{
     $form['have_pets'] = [
       '#type' => 'checkbox',
       '#title' => 'Have you some pets?',
-      '#default_value' => TRUE,
+      '#default_value' => FALSE,
     ];
     $form['pets'] = [
       '#type' => 'container',
@@ -156,30 +159,47 @@ class POUpdateForm extends FormBase{
       '#value' => 'Update',
     ];
 
+    $form['button_delete'] = [
+      '#type' => 'link',
+      '#title' => 'Delete',
+      '#url'=>Url::fromRoute('pets_owners_storage.delete',['test_param'=>$this->id]),
+      '#options' => [
+        'attributes' => [
+          'class' => ['use-ajax','button'],
+          'data-dialog-type' => 'modal',
+        ]
+      ],
+      ];
+
+
+
     return $form;
   }
 
   /**
    * Update user data.
    */
-  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-    $entry = [
-      'id'=>$this->id,
-      'name' => $form_state->getValue('name'),
-      'gender' => $form_state->getValue('gender'),
-      'prefix' => $form_state->getValue('prefix'),
-      'age' => $form_state->getValue('age'),
-      'mother_name' => $form_state->getValue('mother'),
-      'father_name' => $form_state->getValue('father'),
-      'name_of_pets' => $form_state->getValue('have'),
-      'email' => $form_state->getValue('email'),
+  public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    ];
-    $return = $this->repository->update($entry);
-    if ($return) {
-      $this->messenger()->addMessage($this->t('Congratulations! You successfully update your data!'));
-      $form_state->setRedirect('pets_owners_storage.list');
-    }
+      $entry = [
+        'id' => $this->id,
+        'name' => $form_state->getValue('name'),
+        'gender' => $form_state->getValue('gender'),
+        'prefix' => $form_state->getValue('prefix'),
+        'age' => $form_state->getValue('age'),
+        'mother_name' => $form_state->getValue('mother'),
+        'father_name' => $form_state->getValue('father'),
+        'name_of_pets' => $form_state->getValue('have'),
+        'email' => $form_state->getValue('email'),
+
+      ];
+      $return = $this->repository->update($entry);
+      if ($return) {
+        $this->messenger()
+          ->addMessage($this->t('Congratulations! You successfully update your data!'));
+        $form_state->setRedirect('pets_owners_storage.list');
+      }
+
   }
   /**
    * Validate form.
@@ -206,6 +226,8 @@ class POUpdateForm extends FormBase{
       $form_state->setErrorByName('Age', $this->t('Your email is not correct!'));
     }
   }
+
+
 
 
 }

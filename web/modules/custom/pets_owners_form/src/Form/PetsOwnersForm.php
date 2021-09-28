@@ -207,6 +207,7 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
     if ($return) {
       //$this->messenger()->addMessage($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
       $this->messenger()->addMessage($this->t('Congratulations! You successfully saved your data!'));
+      $form_state->setRedirect('pets_owners_storage.list');
     }
     }
 

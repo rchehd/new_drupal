@@ -19,6 +19,7 @@ pets_owners_storage.delete:
   defaults:
     _title: 'Delete entry'
     _form: '\Drupal\pets_owners_storage\Form\PODeleteForm'
+    nojs: ajax
   requirements:
     _permission: 'access content'
 
@@ -38,7 +39,12 @@ pets_owners_storage.update:
   requirements:
     _permission: 'access content'
 
-
-
+pets_owners_storage.ajax_form:
+  path: '/pets_owners_storage/ajax_form'
+  defaults:
+    _title: 'Ajax form'
+    _form: '\Drupal\pets_owners_storage\Form\AjaxExampleForm'
+  requirements:
+    _permission: 'access content'
 
 

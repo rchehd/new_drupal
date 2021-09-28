@@ -53,15 +53,16 @@ class PetsOwnersController extends ControllerBase {
       $rows[] = array_map('Drupal\Component\Utility\Html::escape', (array) $entry);
     }
     // Add links for 'Delete' and 'Update' data.
-    for($i=0;$i<count($rows);$i++){
-      $id=$rows[$i]['id'];
-      //$data=implode(',',$rows[$i]);
-      $link_1 = Link::createFromRoute($this->t('Update'),'pets_owners_storage.update',['data'=>$id])->toString();
-      $link_2 = Link::createFromRoute($this->t('Delete'),'pets_owners_storage.delete',['test_param'=>$id],)->toString();
+    for($i = 0; $i < count($rows); $i++){
+      $id = $rows[$i]['id'];
+      $link_1 = "<a data-dialog-type='dialog' href='/pets_owners_storage/update/$id'>Update</a>";
+      $link_2 = "<a class='use-ajax' data-dialog-type = 'modal' href='/pets_owners_storage/delete/$id'>Delete</a>";
+      //$link_1 = Link::createFromRoute($this->t('Update'),'pets_owners_storage.update',['data'=>$id],[])->toString();
+      //$link_2 = Link::createFromRoute($this->t('Delete'),'pets_owners_storage.delete',['test_param'=>$id],)->toString();
       $link_concat = ['#markup' => $link_1 . ' | ' . $link_2];
       $rows[$i]['actions']=\Drupal::service('renderer')->render($link_concat);
     }
-
+    foreach ($rows as $row){}
     $content['table'] = [
       '#type' => 'table',
       '#header' => $headers,

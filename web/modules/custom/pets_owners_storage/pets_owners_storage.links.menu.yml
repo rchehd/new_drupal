@@ -15,5 +15,9 @@ pets_owners_storage.add:
   weight: 1
   parent: pets_owners_storage.description
 
-
+pets_owners_storage.ajax_form:
+  title: Ajax form
+  route_name: pets_owners_storage.ajax_form
+  weight: 1
+  parent: pets_owners_storage.description
 
