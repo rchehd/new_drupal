@@ -1,0 +1,7 @@
+my_field.description:
+  path: '/my_field/field'
+  defaults:
+    _controller: '\Drupal\my_field\Controller\MyController::printDescription'
+  requirements:
+     _permission: 'access content'
+

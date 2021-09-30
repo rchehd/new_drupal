@@ -50,7 +50,7 @@ class AjaxExampleForm extends FormBase{
             '#type' => 'link',
             '#title' => $this->t('Google'),
             '#url' => Url::fromUri('https://www.google.com'),
-            '#target' => '_blank',
+            '#attributes' => ['target' => '_blank'],
           ];
           break;
 

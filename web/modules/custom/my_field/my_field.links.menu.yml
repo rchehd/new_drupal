@@ -1,0 +1,4 @@
+my_field.description:
+  title: My field
+  route_name: my_field.description
+  expanded: TRUE
