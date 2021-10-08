@@ -28,8 +28,8 @@ class YouTubeFormatter extends FormatterBase{
     $elements = [];
     foreach ($items as $delta => $item) {
       $id = $item->getValue('id_video');
-      $url=$id['id_video'];
-      $id2=$this->getYoutubeIdFromUrl($url);
+      $url = $id['id_video'];
+      $id2 = $this->getYoutubeIdFromUrl($url);
       $elements[$delta] = [
         '#type' => 'html_tag',
         '#tag' => 'iframe',

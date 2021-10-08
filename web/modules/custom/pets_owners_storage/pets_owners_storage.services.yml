@@ -3,3 +3,8 @@ services:
   pets_owners_storage.repository:
     class: Drupal\pets_owners_storage\PetsOwnersRepository
     arguments: ['@database', '@string_translation', '@messenger']
+
+  pets_owners_storage.views_bulk_operations_actions:
+    class: Drupal\pets_owners_storage\EventSubscriber\POSEventSubscriber
+    tags:
+      - { name: event_subscriber }

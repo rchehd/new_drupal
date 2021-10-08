@@ -29,8 +29,7 @@ class WelcomeController extends ControllerBase{
 //      '#markup' => 'Welcome to sub_menu.',
 //    ];
     $response = new RedirectResponse('http://new_drupal.docker.localhost/form_to_pets_owners');
-    $response->send();
-    return;
+    return $response->send();
   }
 
   /**

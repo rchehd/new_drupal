@@ -24,9 +24,11 @@ class MyYoutubeWidget extends TextWidget{
    * {@inheritDoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+    $value = isset($items[$delta]->id_video) ? $items[$delta]->id_video : '';
     $element += array(
       '#type' => 'textfield',
       '#size' => 32,
+      '#default_value' => $value,
       '#placeholder' => 'https://www.youtube.com/',
     );
     return  ['id_video' => $element];

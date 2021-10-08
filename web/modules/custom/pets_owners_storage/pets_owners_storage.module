@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ */
+/**
+ *
+ * @return array
+ *   List of gender.
+ */
+function _pos_get_gender() {
+  $dop = \Drupal::database()->query("SELECT DISTINCT([prefix]) FROM {pets_owners_storage}")
+    ->fetchAllKeyed(0, 0);
+  return $dop;
+}
+function _pos_get_gender2() {
+  return [
+    'Mr' => 'Mr',
+    'Ms' => 'Ms',
+    'Mrs' => 'Mrs',
+  ];
+}
+
+
