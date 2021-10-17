@@ -3,7 +3,8 @@
 !/back_up_1610.sql
 !/web
 !/config
-
+!/composer.json
+!/composer.lock
 /web/*
 !/web/modules
 !/web/themes
