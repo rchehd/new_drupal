@@ -1,0 +1,25 @@
+uuid: 37813b1d-51aa-4e15-a165-fbcd1282175f
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.news
+  module:
+    - system
+  theme:
+    - romanian_theme
+id: romanian_theme_news
+theme: romanian_theme
+region: sidebar_first
+weight: -5
+provider: null
+plugin: 'system_menu_block:news'
+settings:
+  id: 'system_menu_block:news'
+  label: News
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

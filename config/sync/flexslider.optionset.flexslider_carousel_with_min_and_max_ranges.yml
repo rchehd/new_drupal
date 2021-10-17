@@ -1,0 +1,49 @@
+uuid: 38395613-b3e6-4753-85b2-2dac61b13069
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: mvZbfKqr-YM3s3aw0YQLUkIi5D9zrpWlg6g4hQ5P0Z4
+id: flexslider_carousel_with_min_and_max_ranges
+label: 'FlexSlider carousel with min and max ranges'
+options:
+  animation: slide
+  animationSpeed: 600
+  direction: horizontal
+  slideshow: false
+  easing: swing
+  smoothHeight: false
+  reverse: false
+  slideshowSpeed: 7000
+  animationLoop: false
+  randomize: false
+  startAt: 0
+  itemWidth: 210
+  itemMargin: 5
+  minItems: 2
+  maxItems: 4
+  move: 0
+  directionNav: true
+  controlNav: '1'
+  thumbCaptions: false
+  thumbCaptionsBoth: false
+  keyboard: true
+  multipleKeyboard: false
+  mousewheel: false
+  touch: true
+  prevText: Previous
+  nextText: Next
+  namespace: flex-
+  selector: '.slides > li'
+  sync: ''
+  asNavFor: ''
+  initDelay: 0
+  useCSS: true
+  video: false
+  pausePlay: false
+  pauseText: Pause
+  playText: Play
+  pauseOnAction: true
+  pauseOnHover: false
+  controlsContainer: .flex-control-nav-container
+  manualControls: ''

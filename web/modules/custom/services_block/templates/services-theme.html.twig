@@ -1,0 +1,11 @@
+
+<table class="tb">
+  {% for block in list %}
+    <tr>
+      {% for column in block %}
+        <td>{{ column }}</td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+

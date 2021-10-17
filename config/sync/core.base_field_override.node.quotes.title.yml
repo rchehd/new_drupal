@@ -1,0 +1,18 @@
+uuid: 2445edc1-78c5-4b48-9232-192c91e28f90
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.quotes
+id: node.quotes.title
+field_name: title
+entity_type: node
+bundle: quotes
+label: Quote
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

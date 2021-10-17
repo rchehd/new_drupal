@@ -1,11 +1,15 @@
 /*
 !/.gitignore
-
+!/back_up_1610.sql
 !/web
+!/config
 
 /web/*
 !/web/modules
+!/web/themes
 
 /web/modules/*
 !/web/modules/custom
 
+/web/themes/*
+!/web/themes/custom

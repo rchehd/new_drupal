@@ -1,0 +1,32 @@
+{%
+  set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+
+]
+%}
+{#{{ attach_library('service_block/table') }}#}
+<article >
+  <div >
+    <div class="a">{{ content.field_main_image }}</div><br>
+
+  </div>
+  <div>
+    <div >{{ content.field_tags2 }}</div><br>
+  </div>
+   <div>
+     <div><a class="b"  href="{{ url }}" rel="bookmark">{{ content.field_title }}</a></div><br>
+   </div>
+  <div>
+    <div class="c">{{ content.field_subtitle }}</div><br>
+  </div>
+  <div>
+    <div><a class="d"  href="{{ url }}" rel="bookmark">View content</a></div>
+  </div>
+
+{#  </div>#}
+</article>

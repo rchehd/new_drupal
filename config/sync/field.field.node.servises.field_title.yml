@@ -1,0 +1,19 @@
+uuid: 3188720e-51eb-4ba1-b281-8f9db1543389
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title
+    - node.type.servises
+id: node.servises.field_title
+field_name: field_title
+entity_type: node
+bundle: servises
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

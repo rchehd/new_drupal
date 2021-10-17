@@ -1,0 +1,42 @@
+uuid: f6c545b8-f287-452c-8527-fa29b86b7ef0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.news2.body
+    - field.field.node.news2.field_category
+    - field.field.node.news2.field_news_image
+    - field.field.node.news2.field_photos
+    - field.field.node.news2.field_template
+    - node.type.news2
+  module:
+    - text
+    - user
+id: node.news2.teaser
+targetEntityType: node
+bundle: news2
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 1
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_news_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+hidden:
+  field_category: true
+  field_photos: true
+  field_template: true
+  links: true

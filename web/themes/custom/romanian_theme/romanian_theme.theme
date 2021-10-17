@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Romanian theme.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\File\FileSystemInterface;
+
+function romanian_theme_preprocess_maintenance_page(&$variables) {
+  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node instanceof \Drupal\node\NodeInterface) {
+      $field_value = $node->get('field_template')->get(0)->getValue();
+      $dop='Hi it is a'.$field_value['value'];
+      $variables['elements']['#attributes']['template']=$dop;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function romanian_theme_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+//  if($category = $variables['elements']['#node']->get('field_template')->getString()){
+//    $suggestions[]='node__page__'.$category;
+//  }
+  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node instanceof \Drupal\node\NodeInterface) {
+      $dop=$node->getType();
+    if($dop == "news2"){
+      $field_value = $node->get('field_template')->get(0)->getValue();
+      $category=$field_value['value'];
+      $suggestions[]='node__page__'.$category;
+    }
+    if($dop == 'servises'){
+      $suggestions[]='node';
+    }
+
+  }
+
+}
+function romanian_theme_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node instanceof \Drupal\node\NodeInterface) {
+    $dop=$node->getType();
+
+    if($dop == "Service"){
+//      $suggestions[]='field__node__servises';
+      $suggestions[]='node--servises--teaser';
+
+    }
+
+  }
+}
+function romanian_theme_preprocess_block(&$variables) {
+  $block = $variables['elements'];
+  if ($block['#plugin_id'] == 'services_block') {
+    $variables['title_attributes']['class'][] = 'blk';
+  }
+}
+function romanian_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  $block = $variables['elements'];
+  if ($block['#plugin_id'] == 'services_block') {
+    $suggestions[]='node--servises--teaser';
+  }
+
+}
+//  if (isset($element['#field_name'])) {
+//    if ($element['#field_name'] == 'field_tags2') {
+//      foreach ($variables['items'] as $index => $item) {
+//        $variables['items']['content']['#options']['attributes']['class'][]='tg'; // you can generate tid from ['#options']['entity']
+//      }
+//    }
+//  }
+//}
+//function romanian_theme_theme_suggestions_block_alter(array &$suggestions, array &$variables) {
+//    $dop=$variables['elements']['#plugin_id'];
+//  if($dop == 'services_block'){
+//    $suggestions[] = 'block__services';
+//
+//  };
+//  $d=0;
+//}
+
+
+
+
+
+
+

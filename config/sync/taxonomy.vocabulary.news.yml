@@ -1,0 +1,8 @@
+uuid: 48848449-edba-42c8-b4cd-b0773912a4d2
+langcode: en
+status: true
+dependencies: {  }
+name: News
+vid: news
+description: 'Kind of news'
+weight: 0

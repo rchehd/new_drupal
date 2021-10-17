@@ -1,0 +1,29 @@
+uuid: 00e94576-7f7a-4a3b-99fb-8c0c786e9117
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_slideshow
+    - media.type.image
+    - node.type.test
+id: node.test.field_media_slideshow
+field_name: field_media_slideshow
+entity_type: node
+bundle: test
+label: media_slideshow
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

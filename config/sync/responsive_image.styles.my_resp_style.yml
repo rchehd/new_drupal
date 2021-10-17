@@ -1,0 +1,29 @@
+uuid: a92cc019-2c86-458f-bdb3-610cca6d4922
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.max_325x325
+    - image.style.thumbnail
+  theme:
+    - bartik
+id: my_resp_style
+label: My_resp_style
+image_style_mappings:
+  -
+    breakpoint_id: bartik.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: max_325x325
+  -
+    breakpoint_id: bartik.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: max_325x325
+  -
+    breakpoint_id: bartik.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: thumbnail
+breakpoint_group: bartik
+fallback_image_style: '_original image_'
