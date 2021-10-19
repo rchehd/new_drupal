@@ -22,7 +22,7 @@ content:
     region: content
     label: above
     settings:
-      view_mode: default
+      view_mode: service
       link: false
     third_party_settings: {  }
   field_subtitle:

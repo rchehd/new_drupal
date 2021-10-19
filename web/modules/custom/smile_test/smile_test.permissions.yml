@@ -1,0 +1,10 @@
+'delete client entity':
+  title: Delete entity client.
+'add client entity':
+  title: Add entity client
+'view client entity':
+  title: View entity client
+'edit client entity':
+  title: Edit entity client
+'administer client entity':
+  title: Administer settings

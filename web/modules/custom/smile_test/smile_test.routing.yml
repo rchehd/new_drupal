@@ -1,0 +1,47 @@
+entity.smile_test.canonical:
+  path: '/smile_test/{smile_test}'
+  defaults:
+    _entity_view: 'smile_test'
+    _title: 'Client content'
+  requirements:
+    _entity_access: 'smile_test.view'
+
+entity.smile_test.collection:
+  path: '/smile_test/list'
+  defaults:
+    _entity_list: 'smile_test'
+    _title: 'Client list'
+  requirements:
+    _permission: 'view client entity'
+
+smile_test.client_add:
+  path: '/smile_test/add'
+  defaults:
+    _entity_form: smile_test.default
+    _title: 'Add client'
+  requirements:
+    _entity_create_access: 'smile_test'
+
+entity.smile_test.edit_form:
+  path: '/smile_test/{smile_test}/edit'
+  defaults:
+    _entity_form: smile_test.default
+    _title: 'Edit contact'
+  requirements:
+    _entity_access: 'smile_test.update'
+
+entity.smile_test.delete_form:
+  path: '/client/{smile_test}/delete'
+  defaults:
+    _entity_form: smile_test.delete
+    _title: 'Delete client'
+  requirements:
+    _entity_access: 'smile_test.delete'
+
+smile_test.smile_test_settings:
+  path: '/admin/structure/smile_test_settings'
+  defaults:
+    _form: '\Drupal\smile_test\Form\SmileTestSettingsForm'
+    _title: 'Client settings'
+  requirements:
+    _permission: 'administer client entity'

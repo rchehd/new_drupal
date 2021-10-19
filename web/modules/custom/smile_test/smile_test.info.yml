@@ -1,0 +1,10 @@
+name: Smile Entity Test
+type: module
+description: Hometask "How to create a content entity".
+package: Custom
+core_version_requirement: ^9
+# These modules are required by the tests, must be available at bootstrap time
+dependencies:
+  - drupal:options
+  - drupal:user
+

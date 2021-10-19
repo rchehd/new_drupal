@@ -1,0 +1,10 @@
+uuid: 5235309e-ab03-4ed6-9f83-f35c658507b3
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.service
+label: Service
+targetEntityType: media
+cache: true
