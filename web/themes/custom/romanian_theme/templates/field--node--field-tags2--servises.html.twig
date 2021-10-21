@@ -38,7 +38,7 @@
 <div>
   <ul >
     {% for item in items %}
-      <li{{ item.attributes }}><a href="{{ item.content['#url']|render }}" {% if item.content['#options']['external'] %} target="_blank" {% endif %} class="tg">{{ item.content['#title'] }}</a></li>
+      <li{{ item.attributes }} class="tg"><a href="{{ item.content['#url']|render }}" {% if item.content['#options']['external'] %} target="_blank" {% endif %} >{{ item.content['#title'] }}</a></li>
     {% endfor %}
   </ul>
 </div>

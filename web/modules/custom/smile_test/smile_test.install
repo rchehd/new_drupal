@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_hook().
+ */
+/**
+ * Implements hook_update_N().
+ */
+function smile_test_update_9001(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'person')
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+
+  $nodes_per_batch = 25;
+
+  // Handle one pass through.
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'person')
+    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+    ->execute();
+
+  foreach($nids as $nid) {
+    $node = Node::load($nid);
+    $node->field_board_member->value = 0;
+    $node->save();
+    $sandbox['current']++;
+  }
+
+  drupal_set_message($sandbox['current'] . ' nodes processed.');
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+
+}
