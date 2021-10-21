@@ -90,7 +90,7 @@ class SmileListBuilder extends EntityListBuilder {
     $row['client_name'] = $entity->client_name->value;;
     $row['prefered_brand'] = $entity->prefered_brand->value;
     $row['products_owned_count'] = $entity->products_owned_count->value;
-    $row['registration_date'] = DrupalDateTime::createFromTimestamp(time());
+    $row['registration_date'] = DrupalDateTime::createFromTimestamp($entity->registration_date->value);
     return $row + parent::buildRow($entity);
   }
 
