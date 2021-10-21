@@ -2,7 +2,9 @@
 
 
 use Drupal\smile_test\Entity\SmileTest;
-
+/**
+ * implement update hook #1.
+ */
 function smile_test_update_9002(&$sandbox){
   $connection = \Drupal::service('database');
   $arr = [
@@ -73,6 +75,10 @@ function smile_test_update_9002(&$sandbox){
       ->execute();
   }
 }
+
+/**
+ * implement update hook #2.
+ */
 function smile_test_update_9009(){
   $connection = \Drupal::service('database');
   $delta = time()+(60*60*24*2);
@@ -83,14 +89,40 @@ function smile_test_update_9009(){
     ->condition('registration_date',$delta,'>')
     ->execute();
 }
-//function smile_test_update_9008(){
-//  $delta = time()+(60*60*24*2);
-//  $nids = \Drupal::entityQuery('smile_test')
-//    ->condition('registration_date',$delta,'>')
-//    ->execute();
-//  foreach($nids as $nid) {
-//    $st = SmileTest::load($nid);
-//    $st->field_registration_date->value = time();
-//    $st->save();
-//  }
-//}
+
+/**
+ * implement update hook #3.
+ */
+
+function smile_test_update_9010(&$sandbox){
+  $delta = time()+(60*60*24*1);
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('smile_test')
+      ->condition('registration_date',$delta,'>')
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+
+  $nodes_per_batch = 1;
+
+  $nids = \Drupal::entityQuery('smile_test')
+    ->condition('registration_date',$delta,'>')
+    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+    ->execute();
+
+  foreach($nids as $nid) {
+    $node = SmileTest::load($nid);
+    $node->registration_date->value = time();
+    $node->save();
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
+
+
