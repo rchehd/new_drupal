@@ -1,0 +1,54 @@
+<?php
+
+function smile_test_update_9001(&$sandbox){
+  $connection = \Drupal::service('database');
+  $arr = [
+      [
+        'uuid' => uniqid(),
+        'client_name' => 'Bil',
+        'prefered_brand' => 'Emodji',
+        'products_owned_count' => 5,
+        'registration_date' => 1634752344+(24*60*60*1)
+      ],
+      [
+        'uuid' => uniqid(),
+        'client_name' => 'Jack',
+        'prefered_brand' => 'Logo',
+        'products_owned_count' => 4,
+        'registration_date' => 1634752344+(24*60*60*2)
+      ],
+      [
+        'uuid' => uniqid(),
+        'client_name' => 'Dina',
+        'prefered_brand' => 'Smile',
+        'products_owned_count' => 7,
+        'registration_date' => 1634752344+(24*60*60*3)
+      ],
+      [
+        'uuid' => uniqid(),
+        'client_name' => 'Tom',
+        'prefered_brand' => 'Smile',
+        'products_owned_count' => 1,
+        'registration_date' => 1634752344+(24*60*60*4)
+      ],
+      [
+        'uuid' => uniqid(),
+        'client_name' => 'Kate',
+        'prefered_brand' => 'Logo',
+        'products_owned_count' => 2,
+        'registration_date' => 1634752344+(24*60*60*5)
+      ],
+  ];
+  foreach ($arr as $el) {
+  $result = $connection->insert('smile_test')
+    ->fields(['uuid','client_name', 'prefered_brand', 'products_owned_count','registration_date'])
+    ->values([
+      'uuid' => $el['uuid'],
+      'client_name' => $el['client_name'],
+      'prefered_brand' => $el['prefered_brand'],
+      'products_owned_count' => $el['products_owned_count'],
+      'registration_date' => $el['registration_date'],
+    ])
+    ->execute();
+  }
+}

@@ -30,7 +30,7 @@
   display: none;
 }
 
-.tg {
+.tg a{
   border: 1px solid darkgray !important;
   color: black!important;
   padding: 10px;
