@@ -87,7 +87,7 @@ class SmileListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\content_entity_example\Entity\Contact */
     $row['id'] = $entity->id();
-    $row['client_name'] = $entity->client_name->value;;
+    $row['client_name'] = $entity->client_name->value;
     $row['prefered_brand'] = $entity->prefered_brand->value;
     $row['products_owned_count'] = $entity->products_owned_count->value;
     $row['registration_date'] = DrupalDateTime::createFromTimestamp($entity->registration_date->value);

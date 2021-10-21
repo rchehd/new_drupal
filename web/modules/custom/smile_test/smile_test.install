@@ -1,1 +1,96 @@
+<?php
 
+
+use Drupal\smile_test\Entity\SmileTest;
+
+function smile_test_update_9002(&$sandbox){
+  $connection = \Drupal::service('database');
+  $arr = [
+    [
+      'uuid' => uniqid(),
+      'client_name' => 'Bil',
+      'prefered_brand' => 'Emodji',
+      'products_owned_count' => 5,
+      'registration_date' => time()+(60*60*24*1),
+      'langcode' => 'und',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'client_name' => 'Jack',
+      'prefered_brand' => 'Logo',
+      'products_owned_count' => 4,
+      'registration_date' => time()+(60*60*24*2),
+      'langcode' => 'und',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'client_name' => 'Dina',
+      'prefered_brand' => 'Smile',
+      'products_owned_count' => 7,
+      'registration_date' => time()+(60*60*24*3),
+      'langcode' => 'und',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'client_name' => 'Tom',
+      'prefered_brand' => 'Smile',
+      'products_owned_count' => 1,
+      'registration_date' => time()+(60*60*24*4),
+      'langcode' => 'und',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'client_name' => 'Kate',
+      'prefered_brand' => 'Logo',
+      'products_owned_count' => 2,
+      'registration_date' => time()+(60*60*24*5),
+      'langcode' => 'und',
+      'created' => time(),
+      'changed' => time()
+    ],
+  ];
+  foreach ($arr as $el) {
+    $result = $connection->insert('smile_test')
+      ->fields(['uuid','client_name', 'prefered_brand', 'products_owned_count','registration_date','langcode','created','changed'])
+      ->values([
+        'uuid' => $el['uuid'],
+        'client_name' => $el['client_name'],
+        'prefered_brand' => $el['prefered_brand'],
+        'products_owned_count' => $el['products_owned_count'],
+        'registration_date' => $el['registration_date'],
+        'langcode' => $el['langcode'],
+        'created' => $el['created'],
+        'changed' => $el['changed'],
+      ])
+      ->execute();
+  }
+}
+function smile_test_update_9009(){
+  $connection = \Drupal::service('database');
+  $delta = time()+(60*60*24*2);
+  $result = $connection->update('smile_test')
+    ->fields([
+      'registration_date' => time(),
+    ])
+    ->condition('registration_date',$delta,'>')
+    ->execute();
+}
+//function smile_test_update_9008(){
+//  $delta = time()+(60*60*24*2);
+//  $nids = \Drupal::entityQuery('smile_test')
+//    ->condition('registration_date',$delta,'>')
+//    ->execute();
+//  foreach($nids as $nid) {
+//    $st = SmileTest::load($nid);
+//    $st->field_registration_date->value = time();
+//    $st->save();
+//  }
+//}
