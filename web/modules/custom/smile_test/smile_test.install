@@ -1,6 +1,6 @@
 <?php
 
-function smile_test_update_9001(&$sandbox){
+function smile_test_update_9002(&$sandbox){
   $connection = \Drupal::service('database');
   $arr = [
       [
@@ -8,47 +8,100 @@ function smile_test_update_9001(&$sandbox){
         'client_name' => 'Bil',
         'prefered_brand' => 'Emodji',
         'products_owned_count' => 5,
-        'registration_date' => 1634752344+(24*60*60*1)
+        'registration_date' => time()+(60*60*24*1),
+        'langcode' => 'und',
+        'created' => time(),
+        'changed' => time()
       ],
       [
         'uuid' => uniqid(),
         'client_name' => 'Jack',
         'prefered_brand' => 'Logo',
         'products_owned_count' => 4,
-        'registration_date' => 1634752344+(24*60*60*2)
+        'registration_date' => time()+(60*60*24*2),
+        'langcode' => 'und',
+        'created' => time(),
+        'changed' => time()
       ],
       [
         'uuid' => uniqid(),
         'client_name' => 'Dina',
         'prefered_brand' => 'Smile',
         'products_owned_count' => 7,
-        'registration_date' => 1634752344+(24*60*60*3)
+        'registration_date' => time()+(60*60*24*3),
+        'langcode' => 'und',
+        'created' => time(),
+        'changed' => time()
       ],
       [
         'uuid' => uniqid(),
         'client_name' => 'Tom',
         'prefered_brand' => 'Smile',
         'products_owned_count' => 1,
-        'registration_date' => 1634752344+(24*60*60*4)
+        'registration_date' => time()+(60*60*24*4),
+        'langcode' => 'und',
+        'created' => time(),
+        'changed' => time()
       ],
       [
         'uuid' => uniqid(),
         'client_name' => 'Kate',
         'prefered_brand' => 'Logo',
         'products_owned_count' => 2,
-        'registration_date' => 1634752344+(24*60*60*5)
+        'registration_date' => time()+(60*60*24*5),
+        'langcode' => 'und',
+        'created' => time(),
+        'changed' => time()
       ],
   ];
   foreach ($arr as $el) {
   $result = $connection->insert('smile_test')
-    ->fields(['uuid','client_name', 'prefered_brand', 'products_owned_count','registration_date'])
+    ->fields(['uuid','client_name', 'prefered_brand', 'products_owned_count','registration_date','langcode','created','changed'])
     ->values([
       'uuid' => $el['uuid'],
       'client_name' => $el['client_name'],
       'prefered_brand' => $el['prefered_brand'],
       'products_owned_count' => $el['products_owned_count'],
       'registration_date' => $el['registration_date'],
+      'langcode' => $el['langcode'],
+      'created' => $el['created'],
+      'changed' => $el['changed'],
     ])
     ->execute();
   }
 }
+/*function smile_test_update_9002(&$sandbox){
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'person')
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+
+  $nodes_per_batch = 5;
+
+  // Handle one pass through.
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'person')
+    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+    ->execute();
+
+  foreach($nids as $nid) {
+    $node = Node::load($nid);
+    if($node->field_registration_date->value == time()){
+
+    };
+    $node->save();
+    $sandbox['current']++;
+  }
+
+  drupal_set_message($sandbox['current'] . ' nodes processed.');
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+
+}*/
