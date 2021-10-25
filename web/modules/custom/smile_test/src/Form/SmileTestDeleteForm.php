@@ -35,7 +35,6 @@ class SmileTestDeleteForm extends ContentEntityConfirmFormBase {
   public function getConfirmText() {
     return $this->t('Delete');
   }
-
   /**
    * {@inheritdoc}
    *
