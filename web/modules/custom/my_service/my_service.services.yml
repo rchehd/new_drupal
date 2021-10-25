@@ -1,0 +1,4 @@
+services:
+  my_service.custom_service:
+    class: Drupal\my_service\CustomService
+    arguments: ['@database','@string_translation','@current_user','@entity_type.manager','@messenger']

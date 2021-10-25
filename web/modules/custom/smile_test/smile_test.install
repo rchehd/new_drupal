@@ -124,5 +124,55 @@ function smile_test_update_9010(&$sandbox){
     $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
   }
 }
+/**
+ * implement update hook #4.
+ */
+function smile_test_update_9012(){
+  $arr = [
+    [
+      'client_name' => 'Bil2',
+      'prefered_brand' => 'Emodji',
+      'products_owned_count' => 5,
+      'registration_date' => time()+(60*60*24*1),
+    ],
+    [
+      'client_name' => 'Jack2',
+      'prefered_brand' => 'Logo',
+      'products_owned_count' => 4,
+      'registration_date' => time()+(60*60*24*2),
+    ],
+    [
+      'client_name' => 'Dina2',
+      'prefered_brand' => 'Smile',
+      'products_owned_count' => 7,
+      'registration_date' => time()+(60*60*24*3),
+    ],
+    [
+      'client_name' => 'Tom2',
+      'prefered_brand' => 'Smile',
+      'products_owned_count' => 1,
+      'registration_date' => time()+(60*60*24*4),
+    ],
+    [
+      'client_name' => 'Kate2',
+      'prefered_brand' => 'Logo',
+      'products_owned_count' => 2,
+      'registration_date' => time()+(60*60*24*5),
+    ],
+  ];
+
+  foreach ($arr as $el) {
+    $result = SmileTest::create([
+        'client_name' => $el['client_name'],
+        'prefered_brand' => $el['prefered_brand'],
+        'products_owned_count' => $el['products_owned_count'],
+        'registration_date' => $el['registration_date'],
+      ]);
+     $result->save();
+  }
+
+}
+
+
 
 

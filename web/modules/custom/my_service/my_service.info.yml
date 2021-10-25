@@ -1,0 +1,5 @@
+name: My servise
+type: module
+description: Custom service
+package: Custom
+core_version_requirement: ^9
