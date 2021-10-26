@@ -83,9 +83,10 @@ class CustomService {
     return $this->currentUser->id();
   }
   public function getUserData() {
+    $date = date('F j, Y, G:i:s',$this->currentUser->getLastAccessedTime());
     return [
-      'email' => $this->currentUser->getEmail(),
-      'name' => $this->currentUser->getAccountName(),
+      'date' => 'Last visit: '.$date,
+      'name' => 'Login: '.$this->currentUser->getAccountName(),
       ];
   }
 

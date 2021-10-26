@@ -44,7 +44,7 @@ class InfoBlock extends BlockBase implements ContainerFactoryPluginInterface{
     $number_of_user = $this->repository->getCurrentUserPosition();
     $content = $this->t('Content for you');
 
-//    $list['info']['current _user'] = $user_data;
+    $list['info']['current _user'] = $currentUser;
     $list['info']['user_info'] = $user_data;
     $list['info']['all_active'] = $all_active;
     $list['info']['number_of_user'] = $number_of_user;
