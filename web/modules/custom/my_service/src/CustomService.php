@@ -35,8 +35,9 @@ class CustomService {
   public function getAmountOfAllActive() {
     try {
       $result = $this->connection->select('users_field_data', 'us')
-      ->fields('us',['status'])
-      ->execute();
+        ->condition('status','1','=')
+        ->fields('us',['status'])
+        ->execute();
       $record = $result->fetchAll();
       $row = count($record);
       $str = "You are unique among $row users";
@@ -53,8 +54,9 @@ class CustomService {
 
   public function getCurrentUserPosition() {
     $result = $this->connection->select('users_field_data', 'us')
+      ->condition('status','1','=')
       ->fields('us',['uid','created'])
-      ->orderBy('created', 'DESC')
+      ->orderBy('created', 'ASC')
       ->execute();
     $record = $result->fetchAll();
     $count = 0;
