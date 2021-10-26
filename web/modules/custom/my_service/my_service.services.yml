@@ -2,3 +2,10 @@ services:
   my_service.custom_service:
     class: Drupal\my_service\CustomService
     arguments: ['@database','@string_translation','@current_user','@entity_type.manager','@messenger']
+
+  my_service.current_user_decorator:
+    class: Drupal\my_service\CurrentUserDecorator
+    decorates: current_user
+    decoration_priority: 100
+    arguments: ['@my_service.current_user_decorator.inner', '@event_dispatcher']
+
