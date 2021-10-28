@@ -50,13 +50,18 @@ class InfoBlock extends BlockBase implements ContainerFactoryPluginInterface{
     $list['info']['number_of_user'] = $number_of_user;
     $list['info']['content'] = $content;
     $list['info']['node'] = $node;
-
+    $dop=$node['#cache']['tags'][0];
     return [
       '#theme'    => 'info_block_theme',
       '#list'     => $list,
       '#attached' => [
         'library' => ['info_block/style'],
-      ],
+        ],
+      '#cache' => [
+        'tags' => ['node_list'],
+        'max-age' => -1,
+        'contexts' => ['user.roles:authenticated'],
+        ],
     ];
 
     }
@@ -68,9 +73,9 @@ class InfoBlock extends BlockBase implements ContainerFactoryPluginInterface{
   * @return integer
   *   Cache age life time.
   */
-  public function getCacheMaxAge(){
-    return 0;
-  }//end getCacheMaxAge()
+//  public function getCacheMaxAge(){
+//    return 0;
+//  }//end getCacheMaxAge()
 
 
 }
