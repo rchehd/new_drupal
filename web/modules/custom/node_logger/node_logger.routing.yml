@@ -1,0 +1,7 @@
+node_logger.log_node_create:
+  path: '/log_create_node'
+  defaults:
+    _form:  '\Drupal\node_logger\Form\NodeLoggerForm'
+    _title: 'Write to logs'
+  requirements:
+    _permission: 'all'

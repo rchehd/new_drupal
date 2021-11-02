@@ -1,0 +1,23 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\user\Entity\User;
+
+function node_logger_node_insert(EntityInterface $entity) {
+  $queue = \Drupal::queue('NodeLoggerWorker');
+  $users = User::loadMultiple();
+  $item = new \stdClass();
+  foreach ($users as $user) {
+    if ($user->hasRole('administrator')) {
+      $item->nid = $entity->Id();
+      $item->type = $entity->getEntityType();
+      $item->title = $entity->label();
+      $item->user = $user->label();
+      $queue->createItem($item);
+    }
+
+  }
+
+
+}
+

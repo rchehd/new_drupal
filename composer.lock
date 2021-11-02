@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68e47615bf416e4345936d06dd8cdf58",
+    "content-hash": "0cd87a88e215247fbc2a84b0d0cc9400",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2522,6 +2522,58 @@
             }
         },
         {
+            "name": "drupal/progress_bar",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/progress_bar.git",
+                "reference": "9.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/progress_bar-9.0.0.zip",
+                "reference": "9.0.0",
+                "shasum": "c48e1ae290628a27ab3a42992d76614b13d86525"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "9.0.0",
+                    "datestamp": "1632726502",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dishabhadra",
+                    "homepage": "https://www.drupal.org/user/2810419"
+                },
+                {
+                    "name": "manojapare",
+                    "homepage": "https://www.drupal.org/user/2825053"
+                },
+                {
+                    "name": "rakesh.gectcr",
+                    "homepage": "https://www.drupal.org/user/1177822"
+                }
+            ],
+            "description": "Modules provide Progress bar field formatter for List field and State field of commerce.",
+            "homepage": "https://www.drupal.org/project/progress_bar",
+            "support": {
+                "source": "https://git.drupalcode.org/project/progress_bar"
+            }
+        },
+        {
             "name": "drupal/redirect",
             "version": "1.6.0",
             "source": {
@@ -2792,6 +2844,75 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/uikit_image_formatter",
                 "issues": "https://www.drupal.org/project/issues/uikit_image_formatter"
+            }
+        },
+        {
+            "name": "drupal/ultimate_cron",
+            "version": "2.0.0-alpha5",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ultimate_cron.git",
+                "reference": "8.x-2.0-alpha5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ultimate_cron-8.x-2.0-alpha5.zip",
+                "reference": "8.x-2.0-alpha5",
+                "shasum": "0f10464fff29eca89024e7afa5b6d8d07bd52f75"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0-alpha5",
+                    "datestamp": "1600928948",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9 || ^10"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Berdir",
+                    "homepage": "https://www.drupal.org/user/214652"
+                },
+                {
+                    "name": "Dane Powell",
+                    "homepage": "https://www.drupal.org/user/339326"
+                },
+                {
+                    "name": "Primsi",
+                    "homepage": "https://www.drupal.org/user/282629"
+                },
+                {
+                    "name": "arnested",
+                    "homepage": "https://www.drupal.org/user/245635"
+                },
+                {
+                    "name": "gielfeldt",
+                    "homepage": "https://www.drupal.org/user/366993"
+                },
+                {
+                    "name": "miro_dietiker",
+                    "homepage": "https://www.drupal.org/user/227761"
+                }
+            ],
+            "description": "Ultimate cron",
+            "homepage": "https://www.drupal.org/project/ultimate_cron",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ultimate_cron"
             }
         },
         {
@@ -7513,7 +7634,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "drupal/field_slideshow": 10
+        "drupal/field_slideshow": 10,
+        "drupal/ultimate_cron": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

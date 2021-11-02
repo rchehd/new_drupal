@@ -8,6 +8,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\StringTranslation\TranslationInterface;
 
 
@@ -15,15 +16,38 @@ use Drupal\Core\StringTranslation\TranslationInterface;
  * Implement custom service.
  */
 class CustomService {
+
   use MessengerTrait;
   use StringTranslationTrait;
 
-  protected $connection;
-  protected $currentUser;
-  protected $entityTypeManager;
+  /**
+   * Connection to db.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected Connection $connection;
 
-  public function __construct(Connection $connection, TranslationInterface $translation,
-                              AccountInterface $currentUser,EntityTypeManagerInterface $entityTypeManager,
+  /**
+   * Current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected AccountInterface $currentUser;
+
+  /**
+   * Entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * Constructor.
+   */
+  public function __construct(Connection $connection,
+                              TranslationInterface $translation,
+                              AccountInterface $currentUser,
+                              EntityTypeManagerInterface $entityTypeManager,
                               MessengerInterface $messenger) {
     $this->connection = $connection;
     $this->setStringTranslation($translation);
@@ -32,63 +56,72 @@ class CustomService {
     $this->setMessenger($messenger);
   }
 
-  public function getAmountOfAllActive() {
-    try {
-      $result = $this->connection->select('users_field_data', 'us')
-        ->condition('status','1','=')
-        ->fields('us',['status'])
-        ->execute();
-      $record = $result->fetchAll();
-      $row = count($record);
-      $str = "You are unique among $row users";
-      return $this->t($str);
-    }
-    catch (\Exception $e) {
-      $this->messenger()->addMessage($this->t('Select failed. Message = %message', [
-        '%message' => $e->getMessage(),
-      ]), 'error');
-    }
-
+  /**
+   * Get amount of users.
+   */
+  public function getAmountOfAllActive(): TranslatableMarkup {
+    $result = $this->connection->select('users_field_data', 'us')
+      ->condition('status', '1',)
+      ->fields('us', ['status'])
+      ->execute();
+    $record = $result->fetchAll();
+    $row = count($record);
+    return $this->t("You are unique among @row users", ['@row' => $row]);
 
   }
 
-  public function getCurrentUserPosition() {
+  /**
+   * Get current user position.
+   */
+  public function getCurrentUserPosition(): TranslatableMarkup {
     $result = $this->connection->select('users_field_data', 'us')
-      ->condition('status','1','=')
-      ->fields('us',['uid','created'])
+      ->condition('status', '1', '=')
+      ->fields('us', ['uid', 'created'])
       ->orderBy('created', 'ASC')
       ->execute();
     $record = $result->fetchAll();
     $count = 0;
-    foreach ($record as $row){
+    foreach ($record as $row) {
       $id = $row->uid;
       $id2 = $this->getData();
       $count++;
-      if($id == $id2){
+      if ($id == $id2) {
         break;
       }
     };
     $str = "Your position of registration $count ";
     return $this->t($str);
   }
-  public function getNode(){
+
+  /**
+   * Get Node.
+   */
+  public function getNode(): array {
     $nodes = $this->entityTypeManager->getStorage('node')
       ->loadMultiple();
-    $id_node = array_rand($nodes,1);
+    $id_node = array_rand($nodes, 1);
     $node = $this->entityTypeManager->getStorage('node')->load($id_node);
-    $result = $this->entityTypeManager->getViewBuilder('node')->view($node,'teaser');
+    $result = $this->entityTypeManager->getViewBuilder('node')->view($node, 'teaser');
     return $result;
   }
-  public function getData() {
+
+  /**
+   * Get Data.
+   */
+  public function getData(): int {
     return $this->currentUser->id();
   }
-  public function getUserData() {
-    $date = date('F j, Y, G:i:s',$this->currentUser->getLastAccessedTime());
+
+  /**
+   * Get user data.
+   */
+  public function getUserData(): array {
+    $date = date('F j, Y, G:i:s', $this->currentUser->getLastAccessedTime());
     return [
       'date' => 'Last visit: '.$date,
       'name' => 'Login: '.$this->currentUser->getAccountName(),
-      ];
-  }
+    ];
 
+  }
 
 }

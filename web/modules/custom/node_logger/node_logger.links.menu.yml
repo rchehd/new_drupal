@@ -1,0 +1,4 @@
+node_logger.description:
+  title: Node logger form
+  route_name: node_logger.log_node_create
+  expanded: TRUE

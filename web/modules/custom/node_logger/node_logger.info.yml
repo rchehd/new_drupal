@@ -1,0 +1,5 @@
+name: Log node create
+type: module
+description: 'Logger created node for user'
+package: Custom
+core_version_requirement:  ^9
