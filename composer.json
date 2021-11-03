@@ -47,6 +47,7 @@
         "drupal/pathauto": "^1.8",
         "drupal/progress_bar": "^9.0",
         "drupal/redirect": "^1.6",
+        "drupal/restui": "^1.20",
         "drupal/slick": "^2.3",
         "drupal/slick_carousel_slider": "^1.0",
         "drupal/uikit_image_formatter": "^1.5",

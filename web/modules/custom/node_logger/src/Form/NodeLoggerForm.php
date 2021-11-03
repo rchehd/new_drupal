@@ -129,10 +129,12 @@ class NodeLoggerForm extends FormBase implements ContainerInjectionInterface {
   public function processItems($queue, array &$context) {
     // Elements per operation.
     $limit = 1;
+
     // Set default progress values.
     if (empty($context['sandbox']['progress'])) {
       $context['sandbox']['progress'] = 0;
       $context['sandbox']['max'] = $this->count;
+      $context['sandbox']['total'] = $this->count;
     }
 
     $counter = 0;
@@ -141,7 +143,7 @@ class NodeLoggerForm extends FormBase implements ContainerInjectionInterface {
         if ($counter != $limit) {
           $items = $queue->claimItem();
           $this->processItem($items);
-          $this->queue->deleteItem($items);
+          $queue->deleteItem($items);
           $counter++;
           $context['sandbox']['progress']++;
           $context['message'] = $this->t('Now processing node :progress of :count', [
@@ -167,19 +169,19 @@ class NodeLoggerForm extends FormBase implements ContainerInjectionInterface {
    * Process single item.
    */
   public function processItem($item) {
-    // $dop = $item->claimItem();
-    $this->loggerChannelFactor->get('node_logger')->notice('User @username should be notified about new node @node_title[@node_id]', [
-      '@username' => $item->data->user,
-      '@node_title' => $item->data->title,
-      '@node_id' => $item->data->nid,
-    ]);
+    $this->loggerChannelFactor->get('node_logger')
+      ->notice('User @username should be notified about new node @node_title[@node_id]', [
+        '@username' => $item->data->user,
+        '@node_title' => $item->data->title,
+        '@node_id' => $item->data->nid,
+      ]);
   }
 
   /**
    * Exit from batch.
    */
   public function finished($success, $results, $operations) {
-    $message = $this->t('Number of nodes affected by batch: @count', [
+    $message = $this->t('Number of created logs: @count', [
       '@count' => $results['processed'],
     ]);
 
