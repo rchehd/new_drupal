@@ -1,0 +1,22 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+
+function custom_cron_cron() {
+  $data = \Drupal::database();
+  $result = $data->select('node_field_data', 'nfd')
+    ->condition('status', '1',)
+    ->fields('nfd', ['nid','type'])
+    ->orderBy('changed', 'DESC')
+    ->range(1,15)
+    ->execute();
+
+  foreach ($result as $nids) {
+    $queue = \Drupal::queue('CustomWorker');
+    $item = new \stdClass();
+    $item->nid = $nids->nid;
+    $item->type = $nids->type;
+    $queue->createItem($item);
+  }
+}
+

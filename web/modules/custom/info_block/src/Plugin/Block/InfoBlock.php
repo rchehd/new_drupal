@@ -13,17 +13,31 @@ use Psr\Container\ContainerInterface;
  * )
  */
 class InfoBlock extends BlockBase implements ContainerFactoryPluginInterface{
+
+  /**
+   * @var \Drupal\my_service\CustomService
+   */
   protected $repository;
+
+  /**
+   * @var \Drupal\Core\Session\AccountInterface
+   */
   protected $currentUser;
 
   /**
    * Construct a new controller.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition,CustomService $repository,AccountInterface $currentUser) {
+  public function __construct(array $configuration,
+                              $plugin_id,
+                              $plugin_definition,
+                              CustomService $repository,
+                              AccountInterface $currentUser) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->repository = $repository;
     $this->currentUser = $currentUser;
+
   }
+
   /**
    * {@inheritdoc}
    */
@@ -36,7 +50,11 @@ class InfoBlock extends BlockBase implements ContainerFactoryPluginInterface{
       $container->get('current_user'),
     );
   }
-  public function build(){
+
+  /**
+   * Build.
+   */
+  public function build() {
     $currentUser = $this->currentUser->getDisplayName();
     $node = $this->repository->getNode();
     $user_data = $this->repository->getUserData();
@@ -57,20 +75,19 @@ class InfoBlock extends BlockBase implements ContainerFactoryPluginInterface{
       '#attached' => [
         'library' => ['info_block/style'],
       ],
+      '#cache' => [
+        'tags' => $node['#node']->getCacheTags(),
+        'contexts' => ['user.roles:authenticated'],
+      ],
     ];
 
-    }
+  }
 
 
-  /**
-  * Disable block cache.
-  *
-  * @return integer
-  *   Cache age life time.
-  */
-  public function getCacheMaxAge(){
-    return 0;
-  }//end getCacheMaxAge()
+
+//  public function getCacheMaxAge(){
+//    return 0;
+//  }//end getCacheMaxAge()
 
 
 }

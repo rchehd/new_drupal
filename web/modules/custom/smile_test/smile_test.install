@@ -1,6 +1,7 @@
 <?php
 
 
+use Drupal\node\Entity\Node;
 use Drupal\smile_test\Entity\SmileTest;
 /**
  * implement update hook #1.
@@ -173,6 +174,74 @@ function smile_test_update_9012(){
 
 }
 
+/**
+ * implement update hook #3.
+ *
+ * @throws \Exception
+ */
+
+function smile_test_update_9014(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type','news2')
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+
+  $nodes_per_batch = 10;
+
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type','news2')
+    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+    ->execute();
+
+  foreach($nids as $nid) {
+    $node = Node::load($nid);
+    $dop = $node->getTitle();
+    $node->setTitle($dop.' '.random_int(1,100));
+    $node->save();
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
 
 
+/**
+ * Delete nodes.
+ */
 
+function smile_test_update_9015(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type','news2')
+      ->range(0,1000)
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+
+  $nodes_per_batch = 10;
+
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type','news2')
+    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+    ->execute();
+
+  foreach($nids as $nid) {
+    $node = Node::load($nid);
+    $node->delete();
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
