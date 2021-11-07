@@ -1,0 +1,19 @@
+custom_cron.set_parameters:
+  type: config_object
+  label: 'Custom job setting'
+  mapping:
+    period:
+      type: integer
+      label: 'Period to unpublished'
+    items:
+      type: integer
+      label: 'How many items unpublish'
+    disable:
+      type: integer
+      label: 'Status'
+    message:
+      type: string
+      label: 'Message'
+#    langcode:
+#      type: string
+#      label: 'Default language'

@@ -1,0 +1,4 @@
+period: '30'
+items: '10'
+disable: 0
+message: 'Here is my message'

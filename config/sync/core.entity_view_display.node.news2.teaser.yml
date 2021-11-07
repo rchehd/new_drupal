@@ -20,10 +20,10 @@ mode: teaser
 content:
   body:
     label: hidden
-    type: text_summary_or_trimmed
+    type: text_trimmed
     weight: 1
     settings:
-      trim_length: 600
+      trim_length: 20
     third_party_settings: {  }
     region: content
   field_news_image:

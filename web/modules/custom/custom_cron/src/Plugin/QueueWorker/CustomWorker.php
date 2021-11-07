@@ -26,14 +26,18 @@ class CustomWorker extends QueueWorkerBase implements ContainerFactoryPluginInte
   use MessengerTrait;
 
   /**
-   * EntityTypeManager.
+   * Entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
-   * EntityTypeManager.
+   * Logger.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
    */
-  protected $loggerChannelFactor;
+  protected LoggerChannelFactoryInterface $loggerChannelFactor;
 
   /**
    * ReportWorkerBase constructor.
@@ -46,6 +50,8 @@ class CustomWorker extends QueueWorkerBase implements ContainerFactoryPluginInte
    *   The plugin definition.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entityTypeManager.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerChannelFactor
+   *   Logger.
    */
   public function __construct(array $configuration,
                               $plugin_id,
@@ -55,6 +61,7 @@ class CustomWorker extends QueueWorkerBase implements ContainerFactoryPluginInte
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $entityTypeManager;
     $this->loggerChannelFactor = $loggerChannelFactor;
+
   }
 
   /**
@@ -66,7 +73,7 @@ class CustomWorker extends QueueWorkerBase implements ContainerFactoryPluginInte
       $plugin_id,
       $plugin_definition,
       $container->get('entity_type.manager'),
-      $container->get('logger.factory')
+      $container->get('logger.factory'),
     );
 
   }
@@ -75,15 +82,17 @@ class CustomWorker extends QueueWorkerBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   public function processItem($item) {
-    $node = $this->entityTypeManager->getStorage('node')->load($item->nid);
-    if (!$node->isPublished() == FALSE && $node instanceof NodeInterface) {
-      $this->messenger()->addMessage(
-        $this->t('Unpublish @node', [
-          '@node' => $item->nid,
-        ])
-      );
-      $node->setUnpublished(TRUE);
-      $node->save();
+    $config = \Drupal::configFactory()->get('custom_cron.settings');
+    if ($config->get('disable') == 0) {
+      $node = $this->entityTypeManager->getStorage('node')->load($item->nid);
+      if (!$node->isPublished() == FALSE && $node instanceof NodeInterface) {
+        $this->messenger()->addMessage(
+          $config->get('message') . ' ' . $item->nid
+        );
+        $node->setUnpublished(TRUE);
+        $node->save();
+      }
+
     }
 
   }

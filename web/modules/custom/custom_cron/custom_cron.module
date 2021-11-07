@@ -4,11 +4,16 @@ use Drupal\Core\Entity\EntityInterface;
 
 function custom_cron_cron() {
   $data = \Drupal::database();
+  $conf = \Drupal::config("custom_cron.set_parameters");
+  $limit = $conf->get('items');
+  $period = time() - $conf->get('period');
+
   $result = $data->select('node_field_data', 'nfd')
     ->condition('status', '1',)
+    ->condition('changed',$period,'<')
     ->fields('nfd', ['nid','type'])
     ->orderBy('changed', 'DESC')
-    ->range(1,15)
+    ->range(0,$limit)
     ->execute();
 
   foreach ($result as $nids) {

@@ -1,0 +1,7 @@
+custom_cron.set_settings:
+  path: '/custom-cron-settings'
+  defaults:
+    _form: '\Drupal\custom_cron\Form\CustomCronSettingsForm'
+    _title: 'Custom cron settings'
+  requirements:
+    _permission: 'administer site configuration'
