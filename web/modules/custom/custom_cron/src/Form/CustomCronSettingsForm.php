@@ -32,7 +32,7 @@ class CustomCronSettingsForm extends ConfigFormBase {
    * Form for set config to cron.
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
-    $config = \Drupal::configFactory()->get('custom_cron.settings');
+    $config = \Drupal::configFactory()->get('custom_cron.set_parameters');
     $form['description'] = [
       '#type' => 'item',
       '#markup' => $this->t('Parameters for job'),
@@ -42,7 +42,7 @@ class CustomCronSettingsForm extends ConfigFormBase {
     $form['period'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Period(how many days ago should be lastly changed node to recognize as requested one)'),
-      '#default_value' => $config->get('period'),
+      '#default_value' => $this->config('custom_cron.set_parameters')->get('period'),
       '#required' => TRUE,
       '#attributes' => [
         ' type' => 'number',
@@ -53,7 +53,7 @@ class CustomCronSettingsForm extends ConfigFormBase {
     $form['item'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Items to create'),
-      '#default_value' => $config->get('items'),
+      '#default_value' => $this->config('custom_cron.set_parameters')->get('items'),
       '#required' => TRUE,
       '#attributes' => [
         ' type' => 'number',
@@ -65,7 +65,7 @@ class CustomCronSettingsForm extends ConfigFormBase {
       '#type' => 'radios',
       '#title' => $this->t('Disable'),
       '#required' => TRUE,
-      '#default_value' => $config->get('disable') == 0 ? 'No' : 'Yes',
+      '#default_value' => $this->config('custom_cron.set_parameters')->get('disable') == 0 ? 'No' : 'Yes',
       '#options' => [
         'Yes' => $this->t('Yes'),
         'No' => $this->t('No'),
@@ -77,7 +77,7 @@ class CustomCronSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Unpublished label'),
       '#required' => TRUE,
-      '#default_value' => $config->get('message'),
+      '#default_value' => $this->config('custom_cron.set_parameters')->get('message'),
     ];
 
     $form['actions']['#type'] = 'actions';
@@ -109,8 +109,9 @@ class CustomCronSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = \Drupal::configFactory()->getEditable('custom_cron.settings');
-    $config
+//    $config = \Drupal::configFactory()->getEditable('custom_cron.set_parameters');
+//    $config
+    $this->config('custom_cron.set_parameters')
       ->set('period', $form_state->getValue('period'))
       ->set('items', $form_state->getValue('item'))
       ->set('disable', $form_state->getValue('disable') == 'Yes' ? 1 : 0)

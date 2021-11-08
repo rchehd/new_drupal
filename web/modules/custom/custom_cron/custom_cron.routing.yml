@@ -5,3 +5,12 @@ custom_cron.set_settings:
     _title: 'Custom cron settings'
   requirements:
     _permission: 'administer site configuration'
+
+
+custom_cron.login_settings:
+  path: '/custom-cron-login_settings'
+  defaults:
+    _form: '\Drupal\custom_cron\Form\LoginSettingsForm'
+    _title: 'Login settings'
+  requirements:
+    _permission: 'administer site configuration'

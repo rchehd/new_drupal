@@ -82,17 +82,14 @@ class CustomWorker extends QueueWorkerBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   public function processItem($item) {
-    $config = \Drupal::configFactory()->get('custom_cron.settings');
-    if ($config->get('disable') == 0) {
-      $node = $this->entityTypeManager->getStorage('node')->load($item->nid);
-      if (!$node->isPublished() == FALSE && $node instanceof NodeInterface) {
-        $this->messenger()->addMessage(
-          $config->get('message') . ' ' . $item->nid
-        );
-        $node->setUnpublished(TRUE);
-        $node->save();
-      }
-
+    $config = \Drupal::configFactory()->get('custom_cron.set_parameters');
+    $node = $this->entityTypeManager->getStorage('node')->load($item->nid);
+    if (!$node->isPublished() == FALSE && $node instanceof NodeInterface) {
+      $this->messenger()->addMessage(
+        $config->get('message') . ' ' . $item->nid
+      );
+      $node->setUnpublished(TRUE);
+      $node->save();
     }
 
   }

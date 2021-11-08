@@ -1,27 +1,36 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\user\UserInterface;
 
 function custom_cron_cron() {
   $data = \Drupal::database();
-  $conf = \Drupal::config("custom_cron.set_parameters");
+  $conf = \Drupal::configFactory()->get("custom_cron.set_parameters");
   $limit = $conf->get('items');
   $period = time() - $conf->get('period');
+  if ($conf->get('disable') == 0) {
+    $result = $data->select('node_field_data', 'nfd')
+      ->condition('status', '1',)
+      ->condition('changed', $period, '<')
+      ->fields('nfd', ['nid', 'type'])
+      ->orderBy('changed', 'DESC')
+      ->range(0, $limit)
+      ->execute();
 
-  $result = $data->select('node_field_data', 'nfd')
-    ->condition('status', '1',)
-    ->condition('changed',$period,'<')
-    ->fields('nfd', ['nid','type'])
-    ->orderBy('changed', 'DESC')
-    ->range(0,$limit)
-    ->execute();
-
-  foreach ($result as $nids) {
-    $queue = \Drupal::queue('CustomWorker');
-    $item = new \stdClass();
-    $item->nid = $nids->nid;
-    $item->type = $nids->type;
-    $queue->createItem($item);
+    foreach ($result as $nids) {
+      $queue = \Drupal::queue('CustomWorker');
+      $item = new \stdClass();
+      $item->nid = $nids->nid;
+      $item->type = $nids->type;
+      $queue->createItem($item);
+    }
   }
 }
 
+/**
+ * Implements hook_user_login().
+ */
+function custom_cron_user_login(UserInterface $account) {
+  $val = \Drupal::state()->get('login_message');
+  \Drupal::messenger()->addMessage($val.' '.$account->getDisplayName());
+}
