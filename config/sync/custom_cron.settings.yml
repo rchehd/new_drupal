@@ -1,4 +1,4 @@
 period: '30'
 items: '10'
-disable: 0
+disable: 1
 message: 'Here is my message'
