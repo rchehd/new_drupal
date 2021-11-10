@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\custom_event\Event\CustomEvent;
+use Drupal\custom_event\Event\CustomEventReporter;
+
+/**
+ * Implements hook_node_insert().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ */
+function custom_event_node_insert(EntityInterface $node) {
+  $dispatcher = \Drupal::service('event_dispatcher');
+  $type = $node->getType();
+  $title = $node->getTitle();
+  $event = new CustomEventReporter($type,$title);
+  $dispatcher->dispatch(CustomEvent::NODE_SAVE_REPORT, $event);
+}
+
+/**
+ * Implements hook_node_update().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ */
+function custom_event_node_update(EntityInterface $node) {
+  $dispatcher = \Drupal::service('event_dispatcher');
+  $type = $node->getType();
+  $title = $node->getTitle();
+  $event = new CustomEventReporter($type,$title);
+  $dispatcher->dispatch(CustomEvent::NODE_SAVE_REPORT, $event);
+}
+
+

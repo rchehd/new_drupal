@@ -1,0 +1,6 @@
+name: Custom event
+type: module
+description: 'Module to add custom event subscriber.'
+package: Custom
+version: 1.0
+core_version_requirement: ^9

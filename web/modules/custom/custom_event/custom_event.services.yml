@@ -1,0 +1,10 @@
+services:
+  custom_event_subscriber:
+    class: Drupal\custom_event\EventSubscriber\CustomEventSubscriber
+    tags:
+      - {name: event_subscriber}
+
+  custom_event.anonymous_redirect:
+    class: Drupal\custom_event\EventSubscriber\RedirectAnonymousSubscriber
+    tags:
+      - { name: event_subscriber }
