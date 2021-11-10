@@ -19,6 +19,7 @@ module:
   contextual: 0
   ctools: 0
   custom_cron: 0
+  custom_event: 0
   datetime: 0
   dblog: 0
   devel: 0
