@@ -10,11 +10,7 @@ use Drupal\custom_event\Event\CustomEventReporter;
  * @param \Drupal\Core\Entity\EntityInterface $node
  */
 function custom_event_node_insert(EntityInterface $node) {
-  $dispatcher = \Drupal::service('event_dispatcher');
-  $type = $node->getType();
-  $title = $node->getTitle();
-  $event = new CustomEventReporter($type,$title);
-  $dispatcher->dispatch(CustomEvent::NODE_SAVE_REPORT, $event);
+  show_message_event($node);
 }
 
 /**
@@ -23,11 +19,18 @@ function custom_event_node_insert(EntityInterface $node) {
  * @param \Drupal\Core\Entity\EntityInterface $node
  */
 function custom_event_node_update(EntityInterface $node) {
+  show_message_event($node);
+}
+
+/**
+ * Show message.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ */
+function show_message_event(EntityInterface $node){
   $dispatcher = \Drupal::service('event_dispatcher');
   $type = $node->getType();
   $title = $node->getTitle();
   $event = new CustomEventReporter($type,$title);
   $dispatcher->dispatch(CustomEvent::NODE_SAVE_REPORT, $event);
 }
-
-

@@ -6,5 +6,6 @@ services:
 
   custom_event.anonymous_redirect:
     class: Drupal\custom_event\EventSubscriber\RedirectAnonymousSubscriber
+    arguments: ['@messenger' ,'@current_user','@current_route_match']
     tags:
       - { name: event_subscriber }
