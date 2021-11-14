@@ -1,0 +1,10 @@
+{% if content %}
+  <div>
+    <h2 style="font-weight: bold">{{ label }}</h2>
+    <p>Last update: {{ changed }}</p>
+    <h3 style="font-weight: bold">Body</h3>
+      <p>
+        {{ body | trans}}
+      </p>
+  </div>
+{% endif %}

@@ -1,0 +1,48 @@
+entity.smile_entity.canonical:
+  path: '/smile_entity/{smile_entity}'
+  defaults:
+    _entity_view: 'smile_entity'
+    _title: 'Client content'
+  requirements:
+    _entity_access: 'smile_entity.view'
+
+entity.smile_entity.collection:
+  path: '/smile_entity'
+  defaults:
+    _entity_list: 'smile_entity'
+    _title: 'Smile list'
+  requirements:
+    _permission: 'view Smile entity'
+
+smile_entity.entity_add:
+  path: '/smile_entity/add'
+  defaults:
+    _entity_form: smile_entity.default
+    _title: 'Add client'
+  requirements:
+    _entity_create_access: 'smile_entity'
+
+entity.smile_entity.edit_form:
+  path: '/smile_entity/{smile_entity}/edit'
+  defaults:
+    _entity_form: smile_entity.default
+    _title: 'Edit contact'
+  requirements:
+    _entity_access: 'smile_entity.update'
+
+entity.smile_entity.delete_form:
+  path: '/Smile/{smile_entity}/delete'
+  defaults:
+    _entity_form: smile_entity.delete
+    _title: 'Delete client'
+  requirements:
+    _entity_access: 'smile_entity.delete'
+
+smile_entity.smile_entity_settings:
+  path: '/admin/structure/smile_entity_settings'
+  defaults:
+    _form: '\Drupal\smile_entity\Form\SmileEntitySettingsForm'
+    _title: 'Smile Entity'
+  requirements:
+    _permission: 'administer Smile entity'
+
