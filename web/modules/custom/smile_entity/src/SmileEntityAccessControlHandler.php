@@ -19,23 +19,13 @@ class SmileEntityAccessControlHandler extends EntityAccessControlHandler {
    * $operation as defined in the routing.yml file.
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    // Check the admin_permission as defined in your @ContentEntityType
-    // annotation.
-    $admin_permission = $this->entityType->getAdminPermission();
-    if ($account->hasPermission($admin_permission)) {
+
+    $user_role = $entity->get('access_roles')->value;
+    $current_roles = $account->getRoles();
+    if (in_array($user_role, $current_roles)) {
       return AccessResult::allowed();
     }
-    switch ($operation) {
-      case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view Smile entity');
-
-      case 'update':
-        return AccessResult::allowedIfHasPermission($account, 'edit Smile entity');
-
-      case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete Smile entity');
-    }
-    return AccessResult::neutral();
+    return AccessResult::forbidden('You role is not enable for this');
   }
 
   /**

@@ -82,7 +82,6 @@ class SmileEntityListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    // Enable language column and filter if multiple languages are added.
     $header = [
       'title' => $this->t('Title'),
       'author' => $this->t('Author'),

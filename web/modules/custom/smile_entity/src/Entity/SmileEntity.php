@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\smile_entity\SmileEntityInterface;
+use Drupal\user\Entity\Role;
 use Drupal\user\UserInterface;
 
 /**
@@ -29,7 +30,7 @@ use Drupal\user\UserInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "title",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
  *   },
  *   links = {
  *     "canonical" = "/smile_entity/{smile_entity}",
@@ -38,7 +39,6 @@ use Drupal\user\UserInterface;
  *   },
  *   field_ui_base_route = "smile_entity.smile_entity_settings",
  * )
- *
  */
 class SmileEntity extends ContentEntityBase implements SmileEntityInterface {
   use EntityChangedTrait;
@@ -165,6 +165,23 @@ class SmileEntity extends ContentEntityBase implements SmileEntityInterface {
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+    $roles = Role::loadMultiple();
+    $arr = [];
+    foreach ($roles as $r => $key) {
+      $arr[$key->get('id')] = $key->get('id');
+    }
+
+    $fields['access_roles'] = BaseFieldDefinition::create('list_string')
+      ->setSettings(['allowed_values' => $arr])
+      ->setLabel(t('Role'))
+      ->setDescription(t('Role to has access'))
+      ->setDefaultValue('administrator')
+      ->setRequired(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'options_select',
+      ])
+      ->setDisplayConfigurable('form', TRUE);
 
     return $fields;
   }
