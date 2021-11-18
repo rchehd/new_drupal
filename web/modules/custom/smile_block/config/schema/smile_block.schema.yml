@@ -1,0 +1,8 @@
+smile_block.settings:
+  type: block_settings
+  label: 'Add config to our block'
+  mapping:
+    number_entities:
+      type: integer
+      label: 'Count of entities in block'
+

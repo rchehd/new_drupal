@@ -1,0 +1,14 @@
+uuid: a05a55af-a7f7-4ed1-82b5-6ee9ba076558
+langcode: en
+status: true
+dependencies: {  }
+id: manager
+label: Manager
+weight: 4
+is_admin: null
+permissions:
+  - 'add Smile entity'
+  - 'administer Smile entity'
+  - 'delete Smile entity'
+  - 'edit Smile entity'
+  - 'view Smile entity'

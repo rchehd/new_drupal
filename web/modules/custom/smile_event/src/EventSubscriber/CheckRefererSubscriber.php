@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\custom_event\EventSubscriber;
+namespace Drupal\smile_event\EventSubscriber;
 
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -11,9 +11,9 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Check to user referer.
+ * Redirect Anonymous to login page.
  */
-class RedirectAnonymousSubscriber implements EventSubscriberInterface {
+class CheckRefererSubscriber implements EventSubscriberInterface {
 
   /**
    * Current user.
@@ -51,23 +51,21 @@ class RedirectAnonymousSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
-    $events[KernelEvents::REQUEST][] = ['checkAuthStatus'];
+    $events[KernelEvents::REQUEST][] = ['checkReferer'];
     return $events;
   }
 
   /**
    * Check and redirect to login page.
    */
-  public function checkAuthStatus(RequestEvent $event) {
+  public function checkReferer(RequestEvent $event) {
+
     $routes = [
-      'user.login',
-      'user.reset.login',
-      'user.reset',
-      'user.reset.form',
-      'user.pass',
-      'user.register',
+      'entity.smile_entity.canonical',
     ];
-    if ($this->account->isAnonymous() && !in_array($this->route->getRouteName(), $routes)) {
+    $site_url = 'http://drupal2.docker.localhost/';
+    $url = $event->getRequest()->headers->get('referer');
+    if ((strpos($url, $site_url) === FALSE || $url = NULL) && in_array($this->route->getRouteName(), $routes)) {
       $event->setResponse(new RedirectResponse('/user/login', 302));
     }
   }

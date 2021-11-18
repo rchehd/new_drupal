@@ -32,6 +32,8 @@ class SmileEntityForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
+    \Drupal::service('cache_tags.invalidator')
+      ->invalidateTags(['create_smile_entity']);
     $form_state->setRedirect('entity.smile_entity.collection');
     $entity = $this->getEntity();
     $entity->save();
