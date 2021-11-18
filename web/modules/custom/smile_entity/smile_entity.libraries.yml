@@ -1,0 +1,6 @@
+smile_style:
+  version: VERSION
+  css:
+    theme:
+      css/smile_entity.css: {}
+

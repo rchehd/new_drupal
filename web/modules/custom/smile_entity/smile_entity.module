@@ -16,6 +16,7 @@ function smile_entity_theme($existing, $type, $theme, $path) {
       'path' => $path . '/templates',
       'template'  => 'smile-entity',
       'render element' => 'elements',
+
     ],
   ];
 }

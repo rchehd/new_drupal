@@ -9,11 +9,19 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Routing\UrlGeneratorInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  */
 class SmileEntityListBuilder extends EntityListBuilder {
+
+  /**
+   * Current User.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected AccountProxyInterface $currentUser;
 
   /**
    * The url generator.
@@ -38,6 +46,7 @@ class SmileEntityListBuilder extends EntityListBuilder {
       $container->get('entity_type.manager')->getStorage($entity_type->id()),
       $container->get('url_generator'),
       $container->get('date.formatter'),
+      $container->get('current_user'),
     );
   }
 
@@ -54,10 +63,12 @@ class SmileEntityListBuilder extends EntityListBuilder {
   public function __construct(EntityTypeInterface $entity_type,
                               EntityStorageInterface $storage,
                               UrlGeneratorInterface $url_generator,
-                              DateFormatterInterface $date_formatter) {
+                              DateFormatterInterface $date_formatter,
+                              AccountProxyInterface $currentUser) {
     parent::__construct($entity_type, $storage);
     $this->urlGenerator = $url_generator;
     $this->dateFormatter = $date_formatter;
+    $this->currentUser = $currentUser;
 
   }
 
@@ -105,6 +116,18 @@ class SmileEntityListBuilder extends EntityListBuilder {
     $row['created'] = $this->dateFormatter->format($entity->get('created')->getValue()[0]['value'], 'short');
     $row['operations']['data'] = $this->buildOperations($entity);
     return $row + parent::buildRow($entity);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function load(): array {
+    $query = $this->storage->getQuery();
+    $roles = $this->currentUser->getRoles();
+    $entity_ids = $query
+      ->condition('access_roles', $roles, 'IN')
+      ->execute();
+    return $this->storage->loadMultiple($entity_ids);
   }
 
 }
