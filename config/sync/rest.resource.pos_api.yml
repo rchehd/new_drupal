@@ -1,0 +1,20 @@
+uuid: c367c3d4-c1f4-4f3b-8da6-0e5f4e0759fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - pets_owners_storage
+    - serialization
+    - user
+id: pos_api
+plugin_id: pos_api
+granularity: resource
+configuration:
+  methods:
+    - GET
+    - POST
+    - DELETE
+  formats:
+    - json
+  authentication:
+    - cookie

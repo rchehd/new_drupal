@@ -15,4 +15,5 @@ permissions:
   - 'search content'
   - 'use text format my_text_format'
   - 'use text format restricted_html'
+  - 'view Smile entity'
   - 'view media'

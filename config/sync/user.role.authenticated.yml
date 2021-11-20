@@ -18,4 +18,5 @@ permissions:
   - 'skip comment approval'
   - 'use text format basic_html'
   - 'use text format my_text_format'
+  - 'view Smile entity'
   - 'view media'
