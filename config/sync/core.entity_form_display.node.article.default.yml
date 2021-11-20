@@ -1,4 +1,4 @@
-uuid: 73e640f2-4ffa-46ab-acb2-9ab6df26af25
+uuid: 9c7093ed-3830-4e52-b5b2-786b71deaf33
 langcode: en
 status: true
 dependencies:
@@ -6,14 +6,12 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_image
-    - field.field.node.article.field_my_youtube
     - field.field.node.article.field_tags
     - image.style.thumbnail
     - node.type.article
   module:
     - comment
     - image
-    - my_field
     - path
     - text
 _core:
@@ -24,15 +22,15 @@ bundle: article
 mode: default
 content:
   body:
-    weight: 122
+    type: text_textarea_with_summary
+    weight: 1
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    type: text_textarea_with_summary
-    region: content
   comment:
     type: comment_default
     weight: 20
@@ -53,12 +51,6 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_my_youtube:
-    weight: 123
-    settings: {  }
-    third_party_settings: {  }
-    type: youtube_widget
-    region: content
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 3

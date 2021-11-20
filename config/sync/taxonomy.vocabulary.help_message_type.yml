@@ -1,8 +1,0 @@
-uuid: cd56f0a1-68ea-44b3-952a-3782d1ba957c
-langcode: en
-status: true
-dependencies: {  }
-name: 'Help message type'
-vid: help_message_type
-description: 'Type of message in content module'
-weight: 0
