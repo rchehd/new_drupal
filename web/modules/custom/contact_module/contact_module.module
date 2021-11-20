@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implementing hook_mail()
+ */
+function contact_module_mail($key, &$message, $params) {
+  $d=0;
+  $message['headers']['From'] = $params['email_from'];
+  $message['headers']['Sender'] = $params['email_from'];
+  $message['headers']['Return-Path'] = $params['email_from'];
+  $message['subject'] = $params['type'];
+  $message['body'][] =$params['message'];
+
+  $d=0;
+
+}

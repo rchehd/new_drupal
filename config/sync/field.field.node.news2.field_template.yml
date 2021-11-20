@@ -1,0 +1,21 @@
+uuid: 76e13e98-93a8-44e4-b4e4-f8c54a873043
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_template
+    - node.type.news2
+  module:
+    - options
+id: node.news2.field_template
+field_name: field_template
+entity_type: node
+bundle: news2
+label: Template
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

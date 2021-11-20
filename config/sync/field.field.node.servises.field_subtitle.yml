@@ -1,0 +1,19 @@
+uuid: 3d332e01-042e-4edb-ac3c-48f32b695842
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subtitle
+    - node.type.servises
+id: node.servises.field_subtitle
+field_name: field_subtitle
+entity_type: node
+bundle: servises
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

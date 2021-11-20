@@ -1,0 +1,15 @@
+contact_module.contact_form:
+  title: 'Support'
+  description: 'Contact to support'
+  route_name:  contact_module.contact_form
+  parent: main_navigation
+  weight: 15
+
+contact_module.contact_list:
+  title: 'My message'
+  description: 'Contact list'
+  route_name:  contact_module.contact_list
+  parent: main_navigation
+  weight: 16
+
+

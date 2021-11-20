@@ -1,0 +1,15 @@
+uuid: 6d0d3a7e-4c8a-4525-b8d2-3dc1cfcda345
+langcode: en
+status: true
+dependencies: {  }
+name: service
+label: Service
+effects:
+  aa514e76-3063-40fb-95bf-c8bc7a016719:
+    uuid: aa514e76-3063-40fb-95bf-c8bc7a016719
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 350
+      anchor: center-center

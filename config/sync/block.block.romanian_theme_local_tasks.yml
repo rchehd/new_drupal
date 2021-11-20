@@ -1,0 +1,22 @@
+uuid: 2d87b1b0-6ca7-4b2d-9362-2951e022bb1c
+langcode: en
+status: true
+dependencies:
+  theme:
+    - romanian_theme
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: romanian_theme_local_tasks
+theme: romanian_theme
+region: content
+weight: -8
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

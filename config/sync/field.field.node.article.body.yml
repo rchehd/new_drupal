@@ -1,4 +1,4 @@
-uuid: 4c2db9c6-03d1-4e08-bc32-fac77e4d66df
+uuid: 8f70384c-ed5c-49ed-b9f2-acefcc14d64e
 langcode: en
 status: true
 dependencies:
@@ -7,8 +7,6 @@ dependencies:
     - node.type.article
   module:
     - text
-_core:
-  default_config_hash: IjZnOLWk1Pjq3WRg2pLSA1ERh7Po7izCq_p6UztZr2c
 id: node.article.body
 field_name: body
 entity_type: node
@@ -20,6 +18,6 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
+  display_summary: false
   required_summary: false
 field_type: text_with_summary

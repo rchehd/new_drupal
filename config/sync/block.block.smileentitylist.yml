@@ -1,0 +1,23 @@
+uuid: 9f1319bd-3735-4306-baee-f7887e1e8598
+langcode: en
+status: true
+dependencies:
+  module:
+    - smile_block
+  theme:
+    - romanian_theme
+_core:
+  default_config_hash: MGIuiEKV6tvnYQPkNbUSGfCd8u6mRaUIYF-iY11Re44
+id: smileentitylist
+theme: romanian_theme
+region: sidebar_first
+weight: 0
+provider: null
+plugin: smile_block
+settings:
+  id: smile_block
+  label: 'Smile entity list'
+  provider: smile_block
+  label_display: visible
+  number_entities: '3'
+visibility: {  }

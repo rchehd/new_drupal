@@ -1,0 +1,22 @@
+uuid: 61e1ab26-f441-4921-af79-ecbd5ae0ee81
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.quotes.field_author
+    - node.type.quotes
+  module:
+    - user
+id: node.quotes.teaser
+targetEntityType: node
+bundle: quotes
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_author: true

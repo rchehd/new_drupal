@@ -1,0 +1,60 @@
+<?php
+/**
+ * Contact module schema.
+ *
+ * @return array
+ */
+function contact_module_schema(): array {
+  $schema['contact_module'] = [
+    'description' => 'Stores of data of user contact.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique contact ID.',
+      ],
+      'user_id' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => 'User ID.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Email of user.',
+      ],
+      'phone_number' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => 'The phone number of the user.',
+      ],
+      'message' => [
+        'type' => 'text',
+        'size' => 'small', // tiny | small | normal | medium | big
+        'not null' => TRUE,
+        'description' => 'User message.',
+      ],
+      'type' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Type of message.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Datetime of message',
+      ],
+
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'phone_number' => ['phone_number'],
+      'email' => ['email'],
+      'type' => ['type'],
+    ]
+  ];
+  return $schema;
+}

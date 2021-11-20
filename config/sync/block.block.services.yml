@@ -1,0 +1,25 @@
+uuid: 8325ef84-6759-4097-b3bd-416d48b48442
+langcode: en
+status: true
+dependencies:
+  module:
+    - services_block
+    - system
+  theme:
+    - romanian_theme
+id: services
+theme: romanian_theme
+region: content
+weight: -10
+provider: null
+plugin: services_block
+settings:
+  id: services_block
+  label: Services
+  provider: services_block
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false

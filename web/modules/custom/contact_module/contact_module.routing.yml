@@ -1,0 +1,17 @@
+contact_module.contact_form:
+  path: '/contact/add'
+  defaults:
+    _form:  '\Drupal\contact_module\Form\ContactForm'
+    _title: 'Add your message'
+  requirements:
+    _permission: 'access content'
+
+contact_module.contact_list:
+  path: '/contact/list'
+  defaults:
+    _controller:  '\Drupal\contact_module\Controller\ContactListController::entryList'
+    _title: 'List of my message'
+  requirements:
+    _permission: 'show message list'
+  options:
+    no_cache: 'TRUE'
