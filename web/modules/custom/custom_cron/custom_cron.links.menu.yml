@@ -1,0 +1,11 @@
+custom_cron.admin.structure.settings:
+  title: 'Custom cron settings'
+  description: 'Configure cron entity'
+  route_name:  custom_cron.set_settings
+  parent: system.admin_structure
+
+
+custom_cron.login_settings:
+  title: Login settings
+  route_name: custom_cron.login_settings
+  expanded: TRUE

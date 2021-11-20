@@ -1,0 +1,26 @@
+# Define the menu links for this module
+
+entity.smile_entity.collection:
+  title: 'Smile Entity New'
+  route_name: entity.smile_entity.collection
+  description: 'Smile Entity New'
+
+smile_entity.admin.structure.settings:
+  title: 'Smile Entity'
+  description: 'Configure smile entity'
+  route_name:  entity.smile_entity.collection
+  parent: system.admin_structure
+
+smile_entity.settings:
+  title: 'Settings'
+  description: 'Configure smile entity'
+  route_name:  smile_entity.smile_entity_settings
+  parent: smile_entity.admin.structure.settings
+
+
+smile_entity.entity_add:
+  title: 'Add Smile entity'
+  description: 'Adding Smile Entity'
+  route_name:  smile_entity.entity_add
+  parent: smile_entity.admin.structure.settings
+

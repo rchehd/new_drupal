@@ -20,6 +20,10 @@ module:
   contextual: 0
   ctools: 0
   custom_cron: 0
+<<<<<<< HEAD
+=======
+  custom_event: 0
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
   datetime: 0
   dblog: 0
   devel: 0
@@ -75,7 +79,10 @@ module:
   slick_ui: 0
   smile_block: 0
   smile_entity: 0
+<<<<<<< HEAD
   smile_event: 0
+=======
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
   smile_test: 0
   system: 0
   taxonomy: 0

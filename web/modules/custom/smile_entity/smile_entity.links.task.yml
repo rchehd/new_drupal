@@ -1,0 +1,22 @@
+
+
+smile_entity.settings_tab:
+  route_name: smile_entity.smile_entity_settings
+  title: Settings
+  base_route: smile_entity.smile_entity_settings
+
+smile_entity.view:
+  route_name: entity.smile_entity.canonical
+  base_route: entity.smile_entity.canonical
+  title: View
+
+smile_entity.page_edit:
+  route_name: entity.smile_entity.edit_form
+  base_route: entity.smile_entity.canonical
+  title: Edit
+
+smile_entity.delete_confirm:
+  route_name:  entity.smile_entity.delete_form
+  base_route:  entity.smile_entity.canonical
+  title: Delete
+  weight: 10

@@ -1,0 +1,6 @@
+services:
+  smile_event.referer_access:
+    class: Drupal\smile_event\EventSubscriber\CheckRefererSubscriber
+    arguments: ['@messenger' ,'@current_user','@current_route_match']
+    tags:
+      - { name: event_subscriber }

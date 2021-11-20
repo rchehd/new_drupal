@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class for create form 'Pets owners form'.
  */
-class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjectionInterface{
+class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjectionInterface {
   use StringTranslationTrait;
   use MessengerTrait;
 
@@ -32,6 +32,10 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
+
+  /**
+   *
+   */
   public static function create(ContainerInterface $container) {
     $form = new static(
       $container->get('pets_owners_storage.repository'),
@@ -43,6 +47,7 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
     $form->setMessenger($container->get('messenger'));
     return $form;
   }
+
   /**
    * Construct the new form object.
    */
@@ -50,7 +55,6 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
     $this->repository = $repository;
     $this->currentUser = $current_user;
   }
-
 
   /**
    * Method to build form.
@@ -74,9 +78,9 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
       '#type' => 'radios',
       '#title' => $this->t('Gender'),
       '#options' => [
-        'Male'=>$this->t('Male'),
-        'Female'=>$this->t('Female'),
-        'Unknown'=>$this->t('Unknown'),
+        'Male' => $this->t('Male'),
+        'Female' => $this->t('Female'),
+        'Unknown' => $this->t('Unknown'),
       ],
       '#default_value' => 2,
     ];
@@ -185,6 +189,7 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
       $form_state->setErrorByName('Age', $this->t('Your email is not correct!'));
     }
   }
+
   /**
    * {@inheritdoc}
    */
@@ -205,11 +210,10 @@ class PetsOwnersForm extends FormBase implements FormInterface, ContainerInjecti
     ];
     $return = $this->repository->insert($entry);
     if ($return) {
-      //$this->messenger()->addMessage($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
+      // $this->messenger()->addMessage($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
       $this->messenger()->addMessage($this->t('Congratulations! You successfully saved your data!'));
       $form_state->setRedirect('pets_owners_storage.list');
     }
-    }
+  }
 
 }
-

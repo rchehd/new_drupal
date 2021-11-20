@@ -1,0 +1,12 @@
+{% if content %}
+  {{ attach_library('smile_entity/smile_style') }}
+  <div>
+    <h2 class="title"><a class="smile_link" href={{ url }}>{{ label | capitalize}}</a></h2>
+
+    <p class="info">Last update: {{ changed }}</p>
+    <h3 class="body" >Body</h3>
+      <p>
+        {{ body | trans}}
+      </p>
+  </div>
+{% endif %}

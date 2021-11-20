@@ -6,11 +6,6 @@ dependencies:
     - smile_block
   theme:
     - romanian_theme
-<<<<<<< HEAD
-_core:
-  default_config_hash: MGIuiEKV6tvnYQPkNbUSGfCd8u6mRaUIYF-iY11Re44
-=======
->>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
 id: smileentitylist
 theme: romanian_theme
 region: sidebar_first
@@ -22,9 +17,5 @@ settings:
   label: 'Smile entity list'
   provider: smile_block
   label_display: visible
-<<<<<<< HEAD
-  number_entities: '3'
-=======
   number_entities: '2'
->>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
 visibility: {  }

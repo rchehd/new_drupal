@@ -1,0 +1,7 @@
+name: Smile Entity
+type: module
+description: Add Smile Entity.
+package: Custom
+core_version_requirement: ^9
+dependencies:
+    - options

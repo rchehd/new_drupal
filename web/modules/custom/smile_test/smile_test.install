@@ -1,178 +1,247 @@
 <?php
-
-
-use Drupal\smile_test\Entity\SmileTest;
-/**
- * implement update hook #1.
- */
-function smile_test_update_9002(&$sandbox){
-  $connection = \Drupal::service('database');
-  $arr = [
-    [
-      'uuid' => uniqid(),
-      'client_name' => 'Bil',
-      'prefered_brand' => 'Emodji',
-      'products_owned_count' => 5,
-      'registration_date' => time()+(60*60*24*1),
-      'langcode' => 'und',
-      'created' => time(),
-      'changed' => time()
-    ],
-    [
-      'uuid' => uniqid(),
-      'client_name' => 'Jack',
-      'prefered_brand' => 'Logo',
-      'products_owned_count' => 4,
-      'registration_date' => time()+(60*60*24*2),
-      'langcode' => 'und',
-      'created' => time(),
-      'changed' => time()
-    ],
-    [
-      'uuid' => uniqid(),
-      'client_name' => 'Dina',
-      'prefered_brand' => 'Smile',
-      'products_owned_count' => 7,
-      'registration_date' => time()+(60*60*24*3),
-      'langcode' => 'und',
-      'created' => time(),
-      'changed' => time()
-    ],
-    [
-      'uuid' => uniqid(),
-      'client_name' => 'Tom',
-      'prefered_brand' => 'Smile',
-      'products_owned_count' => 1,
-      'registration_date' => time()+(60*60*24*4),
-      'langcode' => 'und',
-      'created' => time(),
-      'changed' => time()
-    ],
-    [
-      'uuid' => uniqid(),
-      'client_name' => 'Kate',
-      'prefered_brand' => 'Logo',
-      'products_owned_count' => 2,
-      'registration_date' => time()+(60*60*24*5),
-      'langcode' => 'und',
-      'created' => time(),
-      'changed' => time()
-    ],
-  ];
-  foreach ($arr as $el) {
-    $result = $connection->insert('smile_test')
-      ->fields(['uuid','client_name', 'prefered_brand', 'products_owned_count','registration_date','langcode','created','changed'])
-      ->values([
-        'uuid' => $el['uuid'],
-        'client_name' => $el['client_name'],
-        'prefered_brand' => $el['prefered_brand'],
-        'products_owned_count' => $el['products_owned_count'],
-        'registration_date' => $el['registration_date'],
-        'langcode' => $el['langcode'],
-        'created' => $el['created'],
-        'changed' => $el['changed'],
-      ])
-      ->execute();
-  }
-}
-
-/**
- * implement update hook #2.
- */
-function smile_test_update_9009(){
-  $connection = \Drupal::service('database');
-  $delta = time()+(60*60*24*2);
-  $result = $connection->update('smile_test')
-    ->fields([
-      'registration_date' => time(),
-    ])
-    ->condition('registration_date',$delta,'>')
-    ->execute();
-}
-
-/**
- * implement update hook #3.
- */
-
-function smile_test_update_9010(&$sandbox){
-  $delta = time()+(60*60*24*1);
-  if (!isset($sandbox['total'])) {
-    $nids = \Drupal::entityQuery('smile_test')
-      ->condition('registration_date',$delta,'>')
-      ->execute();
-    $sandbox['total'] = count($nids);
-    $sandbox['current'] = 0;
-  }
-
-  $nodes_per_batch = 1;
-
-  $nids = \Drupal::entityQuery('smile_test')
-    ->condition('registration_date',$delta,'>')
-    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
-    ->execute();
-
-  foreach($nids as $nid) {
-    $node = SmileTest::load($nid);
-    $node->registration_date->value = time();
-    $node->save();
-    $sandbox['current']++;
-  }
-
-  if ($sandbox['total'] == 0) {
-    $sandbox['#finished'] = 1;
-  } else {
-    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
-  }
-}
-/**
- * implement update hook #4.
- */
-function smile_test_update_9012(){
-  $arr = [
-    [
-      'client_name' => 'Bil2',
-      'prefered_brand' => 'Emodji',
-      'products_owned_count' => 5,
-      'registration_date' => time()+(60*60*24*1),
-    ],
-    [
-      'client_name' => 'Jack2',
-      'prefered_brand' => 'Logo',
-      'products_owned_count' => 4,
-      'registration_date' => time()+(60*60*24*2),
-    ],
-    [
-      'client_name' => 'Dina2',
-      'prefered_brand' => 'Smile',
-      'products_owned_count' => 7,
-      'registration_date' => time()+(60*60*24*3),
-    ],
-    [
-      'client_name' => 'Tom2',
-      'prefered_brand' => 'Smile',
-      'products_owned_count' => 1,
-      'registration_date' => time()+(60*60*24*4),
-    ],
-    [
-      'client_name' => 'Kate2',
-      'prefered_brand' => 'Logo',
-      'products_owned_count' => 2,
-      'registration_date' => time()+(60*60*24*5),
-    ],
-  ];
-
-  foreach ($arr as $el) {
-    $result = SmileTest::create([
-        'client_name' => $el['client_name'],
-        'prefered_brand' => $el['prefered_brand'],
-        'products_owned_count' => $el['products_owned_count'],
-        'registration_date' => $el['registration_date'],
-      ]);
-     $result->save();
-  }
-
-}
-
-
-
-
+//
+//
+//use Drupal\node\Entity\Node;
+//use Drupal\smile_test\Entity\SmileTest;
+///**
+// * implement update hook #1.
+// */
+//function smile_test_update_9002(&$sandbox){
+//  $connection = \Drupal::service('database');
+//  $arr = [
+//    [
+//      'uuid' => uniqid(),
+//      'client_name' => 'Bil',
+//      'prefered_brand' => 'Emodji',
+//      'products_owned_count' => 5,
+//      'registration_date' => time()+(60*60*24*1),
+//      'langcode' => 'und',
+//      'created' => time(),
+//      'changed' => time()
+//    ],
+//    [
+//      'uuid' => uniqid(),
+//      'client_name' => 'Jack',
+//      'prefered_brand' => 'Logo',
+//      'products_owned_count' => 4,
+//      'registration_date' => time()+(60*60*24*2),
+//      'langcode' => 'und',
+//      'created' => time(),
+//      'changed' => time()
+//    ],
+//    [
+//      'uuid' => uniqid(),
+//      'client_name' => 'Dina',
+//      'prefered_brand' => 'Smile',
+//      'products_owned_count' => 7,
+//      'registration_date' => time()+(60*60*24*3),
+//      'langcode' => 'und',
+//      'created' => time(),
+//      'changed' => time()
+//    ],
+//    [
+//      'uuid' => uniqid(),
+//      'client_name' => 'Tom',
+//      'prefered_brand' => 'Smile',
+//      'products_owned_count' => 1,
+//      'registration_date' => time()+(60*60*24*4),
+//      'langcode' => 'und',
+//      'created' => time(),
+//      'changed' => time()
+//    ],
+//    [
+//      'uuid' => uniqid(),
+//      'client_name' => 'Kate',
+//      'prefered_brand' => 'Logo',
+//      'products_owned_count' => 2,
+//      'registration_date' => time()+(60*60*24*5),
+//      'langcode' => 'und',
+//      'created' => time(),
+//      'changed' => time()
+//    ],
+//  ];
+//  foreach ($arr as $el) {
+//    $result = $connection->insert('smile_test')
+//      ->fields(['uuid','client_name', 'prefered_brand', 'products_owned_count','registration_date','langcode','created','changed'])
+//      ->values([
+//        'uuid' => $el['uuid'],
+//        'client_name' => $el['client_name'],
+//        'prefered_brand' => $el['prefered_brand'],
+//        'products_owned_count' => $el['products_owned_count'],
+//        'registration_date' => $el['registration_date'],
+//        'langcode' => $el['langcode'],
+//        'created' => $el['created'],
+//        'changed' => $el['changed'],
+//      ])
+//      ->execute();
+//  }
+//}
+//
+///**
+// * implement update hook #2.
+// */
+//function smile_test_update_9009(){
+//  $connection = \Drupal::service('database');
+//  $delta = time()+(60*60*24*2);
+//  $result = $connection->update('smile_test')
+//    ->fields([
+//      'registration_date' => time(),
+//    ])
+//    ->condition('registration_date',$delta,'>')
+//    ->execute();
+//}
+//
+///**
+// * implement update hook #3.
+// */
+//
+//function smile_test_update_9010(&$sandbox){
+//  $delta = time()+(60*60*24*1);
+//  if (!isset($sandbox['total'])) {
+//    $nids = \Drupal::entityQuery('smile_test')
+//      ->condition('registration_date',$delta,'>')
+//      ->execute();
+//    $sandbox['total'] = count($nids);
+//    $sandbox['current'] = 0;
+//  }
+//
+//  $nodes_per_batch = 1;
+//
+//  $nids = \Drupal::entityQuery('smile_test')
+//    ->condition('registration_date',$delta,'>')
+//    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+//    ->execute();
+//
+//  foreach($nids as $nid) {
+//    $node = SmileTest::load($nid);
+//    $node->registration_date->value = time();
+//    $node->save();
+//    $sandbox['current']++;
+//  }
+//
+//  if ($sandbox['total'] == 0) {
+//    $sandbox['#finished'] = 1;
+//  } else {
+//    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+//  }
+//}
+///**
+// * implement update hook #4.
+// */
+//function smile_test_update_9012(){
+//  $arr = [
+//    [
+//      'client_name' => 'Bil2',
+//      'prefered_brand' => 'Emodji',
+//      'products_owned_count' => 5,
+//      'registration_date' => time()+(60*60*24*1),
+//    ],
+//    [
+//      'client_name' => 'Jack2',
+//      'prefered_brand' => 'Logo',
+//      'products_owned_count' => 4,
+//      'registration_date' => time()+(60*60*24*2),
+//    ],
+//    [
+//      'client_name' => 'Dina2',
+//      'prefered_brand' => 'Smile',
+//      'products_owned_count' => 7,
+//      'registration_date' => time()+(60*60*24*3),
+//    ],
+//    [
+//      'client_name' => 'Tom2',
+//      'prefered_brand' => 'Smile',
+//      'products_owned_count' => 1,
+//      'registration_date' => time()+(60*60*24*4),
+//    ],
+//    [
+//      'client_name' => 'Kate2',
+//      'prefered_brand' => 'Logo',
+//      'products_owned_count' => 2,
+//      'registration_date' => time()+(60*60*24*5),
+//    ],
+//  ];
+//
+//  foreach ($arr as $el) {
+//    $result = SmileTest::create([
+//        'client_name' => $el['client_name'],
+//        'prefered_brand' => $el['prefered_brand'],
+//        'products_owned_count' => $el['products_owned_count'],
+//        'registration_date' => $el['registration_date'],
+//      ]);
+//     $result->save();
+//  }
+//
+//}
+//
+///**
+// * implement update hook #3.
+// *
+// * @throws \Exception
+// */
+//
+//function smile_test_update_9014(&$sandbox) {
+//  if (!isset($sandbox['total'])) {
+//    $nids = \Drupal::entityQuery('node')
+//      ->condition('type','news2')
+//      ->execute();
+//    $sandbox['total'] = count($nids);
+//    $sandbox['current'] = 0;
+//  }
+//
+//  $nodes_per_batch = 10;
+//
+//  $nids = \Drupal::entityQuery('node')
+//    ->condition('type','news2')
+//    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+//    ->execute();
+//
+//  foreach($nids as $nid) {
+//    $node = Node::load($nid);
+//    $dop = $node->getTitle();
+//    $node->setTitle($dop.' '.random_int(1,100));
+//    $node->save();
+//    $sandbox['current']++;
+//  }
+//
+//  if ($sandbox['total'] == 0) {
+//    $sandbox['#finished'] = 1;
+//  } else {
+//    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+//  }
+//}
+//
+//
+///**
+// * Delete nodes.
+// */
+//
+//function smile_test_update_9015(&$sandbox) {
+//  if (!isset($sandbox['total'])) {
+//    $nids = \Drupal::entityQuery('node')
+//      ->condition('type','news2')
+//      ->range(0,1000)
+//      ->execute();
+//    $sandbox['total'] = count($nids);
+//    $sandbox['current'] = 0;
+//  }
+//
+//  $nodes_per_batch = 10;
+//
+//  $nids = \Drupal::entityQuery('node')
+//    ->condition('type','news2')
+//    ->range($sandbox['current'], $sandbox['current'] + $nodes_per_batch)
+//    ->execute();
+//
+//  foreach($nids as $nid) {
+//    $node = Node::load($nid);
+//    $node->delete();
+//    $sandbox['current']++;
+//  }
+//
+//  if ($sandbox['total'] == 0) {
+//    $sandbox['#finished'] = 1;
+//  } else {
+//    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+//  }
+//}

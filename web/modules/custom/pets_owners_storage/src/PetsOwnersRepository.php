@@ -3,11 +3,15 @@
 namespace Drupal\pets_owners_storage;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Database\DatabaseNotFoundException;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
 
+/**
+ *
+ */
 class PetsOwnersRepository {
   use MessengerTrait;
   use StringTranslationTrait;
@@ -56,9 +60,9 @@ class PetsOwnersRepository {
     }
     catch (\Exception $e) {
       $this->messenger()->addMessage($this->t('Update failed. Message = %message, query= %query', [
-          '%message' => $e->getMessage(),
-          '%query' => $e->query_string,
-        ]
+        '%message' => $e->getMessage(),
+        '%query' => $e->query_string,
+      ]
       ), 'error');
     }
     return $count ?? 0;
@@ -68,9 +72,14 @@ class PetsOwnersRepository {
    * Delete an entry from the database.
    */
   public function delete(int $id) {
-    $this->connection->delete('pets_owners_storage')
-      ->condition('id', $id)
-      ->execute();
+    try {
+      $this->connection->delete('pets_owners_storage')
+        ->condition('id', $id)
+        ->execute();
+    }
+    catch (DatabaseNotFoundException $e) {
+      return $e->getMessage();
+    }
   }
 
   /**
@@ -90,6 +99,10 @@ class PetsOwnersRepository {
     // Return the result in object format.
     return $select->execute()->fetchAll();
   }
+
+  /**
+   *
+   */
   public function loadFromId($id) {
     // Read all the fields from the dbtng_example table.
     $select = $this->connection
@@ -100,4 +113,5 @@ class PetsOwnersRepository {
     // Return the result in object format.
     return $select->execute()->fetchAll();
   }
+
 }

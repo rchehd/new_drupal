@@ -1,0 +1,35 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\user\Entity\Role;
+
+/**
+ * Add new field to Smile Entity.
+ */
+function smile_entity_update_9006(){
+  // Load all roles.
+  $roles = Role::loadMultiple();
+
+  // Make data array for selector.
+  $arr = [];
+  foreach ($roles as $r => $key) {
+    $arr[$key->get('id')] = $key->get('id');
+  }
+  $updates = \Drupal::entityDefinitionUpdateManager();
+
+  // New field, also have been added in entity class.
+  $fields = BaseFieldDefinition::create('list_string')
+    ->setSettings(['allowed_values' => $arr])
+    ->setLabel(t('Role'))
+    ->setDescription(t('Role to has access'))
+    ->setDefaultValue('administrator')
+    ->setRequired(TRUE)
+    ->setDisplayOptions('form', [
+      'type' => 'options_select',
+    ])
+    ->setDisplayConfigurable('form', TRUE);
+
+  // install new field.
+  $updates->installFieldStorageDefinition('access_roles', 'smile_entity', 'smile_entity', $fields);
+
+}

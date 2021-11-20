@@ -1,0 +1,9 @@
+
+smile_entity.entity_add:
+  # Which route will be called by the link
+  route_name: smile_entity.entity_add
+  title: 'Add Entity'
+  # Where will the link appear, defined by route name.
+  appears_on:
+    - entity.smile_entity.collection
+

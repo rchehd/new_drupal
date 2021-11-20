@@ -1,0 +1,46 @@
+<?php
+
+use Drupal\Component\Render\PlainTextOutput;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Render\Element;
+use Drupal\smile_entity\Entity\SmileEntity;
+use Drupal\user\Entity\Role;
+
+/**
+ * @file
+ * Twig template for render content
+ */
+function smile_entity_theme($existing, $type, $theme, $path) {
+  return  [
+    'smile_entity' => [
+      'path' => $path . '/templates',
+      'template'  => 'smile-entity',
+      'render element' => 'elements',
+
+    ],
+  ];
+}
+
+/**
+ * Preprocess to change template for smile entity.
+ *
+ * @param $variables
+ *
+ * @throws \Drupal\Core\Entity\EntityMalformedException
+ */
+function template_preprocess_smile_entity(&$variables) {
+  // Helpful $content variable for templates.
+  $variables['content'] = [];
+  foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+  /** @var SmileEntity $entity */
+  $entity = $variables['elements']['#smile_entity'];
+  //Set variables to template.
+  $variables['label'] = $entity->label();
+  $variables['url'] = $entity->toUrl()->toString();
+  $variables['changed'] = \Drupal::service('date.formatter')->format($entity->getChangedTime(), 'short');
+  $variables['body'] = $entity->get('body')->value;
+}
+
+

@@ -1423,6 +1423,7 @@
         },
         {
             "name": "drupal/core",
+<<<<<<< HEAD
             "version": "9.2.9",
             "source": {
                 "type": "git",
@@ -1433,6 +1434,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/drupal/core/zipball/2e2f015e881abccc32efcd264128e8a8444b2ec1",
                 "reference": "2e2f015e881abccc32efcd264128e8a8444b2ec1",
+=======
+            "version": "9.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drupal/core.git",
+                "reference": "b40ae04a0a8a8a0952e77da7545de5ee8fa40757"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drupal/core/zipball/b40ae04a0a8a8a0952e77da7545de5ee8fa40757",
+                "reference": "b40ae04a0a8a8a0952e77da7545de5ee8fa40757",
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
                 "shasum": ""
             },
             "require": {
@@ -1671,6 +1684,7 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/drupal/core/tree/9.2.9"
             },
             "time": "2021-11-17T21:05:58+00:00"
@@ -1678,6 +1692,15 @@
         {
             "name": "drupal/core-composer-scaffold",
             "version": "9.2.9",
+=======
+                "source": "https://github.com/drupal/core/tree/9.2.8"
+            },
+            "time": "2021-11-03T17:25:16+00:00"
+        },
+        {
+            "name": "drupal/core-composer-scaffold",
+            "version": "9.2.8",
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -1721,13 +1744,21 @@
                 "drupal"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/drupal/core-composer-scaffold/tree/9.2.9"
+=======
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.2.8"
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
             },
             "time": "2021-08-24T12:04:07+00:00"
         },
         {
             "name": "drupal/core-project-message",
+<<<<<<< HEAD
             "version": "9.2.9",
+=======
+            "version": "9.2.8",
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -1762,12 +1793,17 @@
                 "drupal"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/drupal/core-project-message/tree/9.3.0-beta1"
+=======
+                "source": "https://github.com/drupal/core-project-message/tree/9.3.0-alpha1"
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
             },
             "time": "2020-09-14T13:40:36+00:00"
         },
         {
             "name": "drupal/core-recommended",
+<<<<<<< HEAD
             "version": "9.2.9",
             "source": {
                 "type": "git",
@@ -1778,6 +1814,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/drupal/core-recommended/zipball/a052e6f47864bb6597e6f449b9cfdb1aa4eea400",
                 "reference": "a052e6f47864bb6597e6f449b9cfdb1aa4eea400",
+=======
+            "version": "9.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drupal/core-recommended.git",
+                "reference": "c77ac58a8ef159065a7d28853e41f758a9cb057d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/c77ac58a8ef159065a7d28853e41f758a9cb057d",
+                "reference": "c77ac58a8ef159065a7d28853e41f758a9cb057d",
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
                 "shasum": ""
             },
             "require": {
@@ -1786,7 +1834,11 @@
                 "doctrine/annotations": "1.13.1",
                 "doctrine/lexer": "1.2.1",
                 "doctrine/reflection": "1.2.2",
+<<<<<<< HEAD
                 "drupal/core": "9.2.9",
+=======
+                "drupal/core": "9.2.8",
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
                 "egulias/email-validator": "2.1.25",
                 "guzzlehttp/guzzle": "6.5.5",
                 "guzzlehttp/promises": "1.4.1",
@@ -1849,9 +1901,15 @@
             ],
             "description": "Locked core dependencies; require this project INSTEAD OF drupal/core.",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/drupal/core-recommended/tree/9.2.9"
             },
             "time": "2021-11-17T21:05:58+00:00"
+=======
+                "source": "https://github.com/drupal/core-recommended/tree/9.2.8"
+            },
+            "time": "2021-11-03T17:25:16+00:00"
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
         },
         {
             "name": "drupal/ctools",
@@ -3292,6 +3350,7 @@
         },
         {
             "name": "firebase/php-jwt",
+<<<<<<< HEAD
             "version": "v5.5.1",
             "source": {
                 "type": "git",
@@ -3302,6 +3361,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/firebase/php-jwt/zipball/83b609028194aa042ea33b5af2d41a7427de80e6",
                 "reference": "83b609028194aa042ea33b5af2d41a7427de80e6",
+=======
+            "version": "v5.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "cf814442ce0e9eebe5317d61b63ccda4b85de67a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/cf814442ce0e9eebe5317d61b63ccda4b85de67a",
+                "reference": "cf814442ce0e9eebe5317d61b63ccda4b85de67a",
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
                 "shasum": ""
             },
             "require": {
@@ -3343,9 +3414,15 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/firebase/php-jwt/tree/v5.5.1"
             },
             "time": "2021-11-08T20:18:51+00:00"
+=======
+                "source": "https://github.com/firebase/php-jwt/tree/v5.5.0"
+            },
+            "time": "2021-11-04T16:21:41+00:00"
+>>>>>>> a9bcfaad2d169286d041e860f2e91c8a9be5240c
         },
         {
             "name": "google/apiclient",
