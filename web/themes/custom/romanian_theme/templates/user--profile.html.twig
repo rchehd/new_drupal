@@ -1,0 +1,13 @@
+<article>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</article>
+{% if log_mode == 1 %}
+  <h2>Available links:</h2><br>
+  {% for key, url in urls %}
+    <p>
+      <a href={{ url }}>{{ key }}</a>
+    </p>
+  {% endfor %}
+{% endif %}

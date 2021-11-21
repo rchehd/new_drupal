@@ -1,0 +1,7 @@
+login_only_mode.settings_form:
+  path: '/login_mode/settings'
+  defaults:
+    _form:  '\Drupal\login_only_mode\Form\LoginOnlyModForm'
+    _title: 'Login Only Mode'
+  requirements:
+    _role: 'administrator'

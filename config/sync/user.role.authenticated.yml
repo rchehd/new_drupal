@@ -15,6 +15,7 @@ permissions:
   - 'access site-wide contact form'
   - 'post comments'
   - 'search content'
+  - 'show message list'
   - 'skip comment approval'
   - 'use text format basic_html'
   - 'use text format my_text_format'

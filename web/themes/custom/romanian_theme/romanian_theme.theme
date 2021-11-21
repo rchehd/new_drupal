@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Url;
 
 function romanian_theme_preprocess_maintenance_page(&$variables) {
   if (($node = \Drupal::routeMatch()->getParameter('node')) && $node instanceof \Drupal\node\NodeInterface) {
@@ -65,25 +66,24 @@ function romanian_theme_theme_suggestions_block_alter(array &$suggestions, array
   }
 
 }
-//  if (isset($element['#field_name'])) {
-//    if ($element['#field_name'] == 'field_tags2') {
-//      foreach ($variables['items'] as $index => $item) {
-//        $variables['items']['content']['#options']['attributes']['class'][]='tg'; // you can generate tid from ['#options']['entity']
-//      }
-//    }
-//  }
-//}
-//function romanian_theme_theme_suggestions_block_alter(array &$suggestions, array &$variables) {
-//    $dop=$variables['elements']['#plugin_id'];
-//  if($dop == 'services_block'){
-//    $suggestions[] = 'block__services';
-//
-//  };
-//  $d=0;
-//}
 
-
-
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function romanian_theme_theme_suggestions_user_alter(array &$suggestions, array &$variables) {
+  $request = \Drupal::routeMatch()->getRouteObject();
+  $log_mode = \Drupal::state()->get('login_only_mode');
+  $path_args = explode('/', $request->getPath());
+  if (\Drupal::currentUser()->isAuthenticated() && in_array('user', $path_args)) {
+    $suggestions[] = 'user__profile';
+    $variables['urls'] = [
+      'Contact Form' => Url::fromRoute('contact_module.contact_form'),
+      'Message list' => Url::fromRoute('contact_module.contact_list'),
+    ];
+    $variables['log_mode'] = $log_mode;
+    $variables['#cache']['max-age'] = 0;
+  }
+}
 
 
 

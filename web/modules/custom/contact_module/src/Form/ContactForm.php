@@ -147,7 +147,7 @@ class ContactForm extends FormBase implements FormInterface, ContainerInjectionI
     // Button.
     $form['button'] = [
       '#type' => 'submit',
-      '#value' => 'Add',
+      '#value' => 'Send',
     ];
     return $form;
   }

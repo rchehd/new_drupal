@@ -1,0 +1,7 @@
+services:
+  login_only_mode.chech_login:
+    class: Drupal\login_only_mode\EventSubscriber\CheckLoginStatusSubscriber
+    arguments: ['@messenger' ,'@current_user','@current_route_match', '@state']
+    tags:
+      - { name: event_subscriber }
+

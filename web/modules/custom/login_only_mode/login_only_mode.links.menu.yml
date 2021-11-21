@@ -1,0 +1,5 @@
+login_only_mode.settings:
+  title: 'Login Only Mode'
+  description: 'Enable/Disable login mode'
+  route_name:  login_only_mode.settings_form
+  parent: system.admin_config_development

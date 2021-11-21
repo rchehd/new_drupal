@@ -1,0 +1,5 @@
+name: Login Only Mod
+type: module
+description: Enable login only mod.
+package: Custom
+core_version_requirement: ^9

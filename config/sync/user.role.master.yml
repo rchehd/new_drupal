@@ -11,4 +11,5 @@ permissions:
   - 'administer Smile entity'
   - 'delete Smile entity'
   - 'edit Smile entity'
+  - 'show message list'
   - 'view Smile entity'
